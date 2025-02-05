@@ -8,10 +8,9 @@ const session = require('express-session');
 const { where } = require('sequelize');
 const bcrypt = require('bcryptjs');
 const path = require("path");
-// Ensure uploads folder exists
+
 const fs = require("fs");
-const multer = require("multer");
-// const upload = multer({ dest: "uploads/" }); 
+const multer = require("multer"); 
 const uploadDir = "uploads";
 if (!fs.existsSync(uploadDir)) {
   fs.mkdirSync(uploadDir);
@@ -121,14 +120,14 @@ console.log("Profile Photo:", profilePhoto);
     });
     app.get('/verify-auth', (req, res) => {
         const userId = req.cookies.userId;
-        const profilePhoto = req.cookies.profilePhoto; // Retrieve profile photo from cookies
+        const profilePhoto = req.cookies.profilePhoto; 
         console.log("user id in auth:", userId);
     
         if (userId) {
             res.json({
                 authenticated: true,
                 role: req.cookies.userRole,
-                profilePhoto: profilePhoto // Send profile photo to frontend
+                profilePhoto: profilePhoto 
             });
         } else {
             res.status(401).json({ authenticated: false });
@@ -150,7 +149,6 @@ console.log("Profile Photo:", profilePhoto);
             const model = await connection();
             const user = req.user;
     
-            // Set cookies
             res.cookie('userId', user.id, { maxAge: 24 * 60 * 60 * 1000 });
             res.cookie('userRole', user.role, { maxAge: 24 * 60 * 60 * 1000 });
             res.cookie('profilePhoto', user.profilePhoto, { maxAge: 24 * 60 * 60 * 1000 }); // Set profile photo in cookies
