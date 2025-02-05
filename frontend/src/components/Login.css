@@ -1,0 +1,137 @@
+.login-container {
+  background: linear-gradient(135deg, #f4f4f4, #ffffff);
+  padding: 2rem;
+  border-radius: 16px;
+  max-width: 400px;
+  width: 100%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1), 0 4px 12px rgba(0, 0, 0, 0.07);
+  transition: transform 0.3s ease-in-out;
+  background-color: #ffffff;
+}
+
+.login-title {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #003366;
+  margin-bottom: 1.5rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  font-family: 'Poppins', sans-serif;
+}
+
+.google-login-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+  background: #4285F4;
+  color: #fff;
+  padding: 1rem;
+  /* border: 2px solid #006400; */
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  width: 100%;
+  margin-bottom: 1rem;
+}
+
+.google-login-btn img {
+  width: 20px;
+}
+
+.form-group {
+  text-align: left;
+  margin: 1.5rem 0;
+}
+
+label {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 0.4rem;
+  display: block;
+}
+
+.input-field {
+  width: 94% !important;
+  margin: auto !important;
+  background: #fafafa;
+  color: #333;
+  outline: none !important;
+}
+
+.input-field:focus {
+  border-color: #f90;
+  background-color: #fff;
+}
+
+.forgot-password {
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.forgot-password a {
+  text-decoration: none;
+  color: rgb(102, 102, 102);
+  font-size: large;
+}
+
+.forgot-password a:hover {
+  text-decoration: underline;
+}
+
+.forgot-password:hover {
+  color: #f90;
+}
+
+.login-btn {
+  background: rgb(81, 81, 81);
+  color: #fff;
+  font-weight: bold;
+  cursor: pointer;
+  width: 50%;
+}
+
+.signup-text {
+  font-size: 0.9rem;
+  color: #777;
+}
+
+.signup-text a {
+  color: #003366;
+  text-decoration: none;
+  font-weight: 700;
+  transition: color 0.3s ease;
+}
+
+.signup-text a:hover {
+  color: #f90;
+}
+
+@media (max-width: 480px) {
+  .login-container {
+    padding: 1.5rem;
+    max-width: 320px;
+  }
+
+  .login-title {
+    font-size: 1.6rem;
+  }
+
+  .input-field {
+    padding: 0.8rem;
+    font-size: 1rem;
+  }
+
+  .login-btn, .google-login-btn {
+    padding: 0.8rem;
+    font-size: 1rem;
+  }
+}

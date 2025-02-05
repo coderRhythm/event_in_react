@@ -1,0 +1,153 @@
+/* Main container */
+.signup-container {
+    max-width: 500px;
+    margin: 20vh auto; /* Centering with vertical space */
+    padding: 2rem;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    background: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transform: translateY(0); /* For smooth appearance in animation */
+    animation: slideDown 0.5s ease-out;
+  }
+  
+  /* Animates the container sliding down */
+  @keyframes slideDown {
+    from {
+      opacity: 0;
+      transform: translateY(-20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  /* Headers */
+  .signup-container h2 {
+    text-align: center;
+    margin-bottom: 1rem;
+    font-size: 2rem; /* Slightly larger */
+    color: #333;
+  }
+  
+  .signup-container h3 {
+    text-align: center;
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
+    color: #555;
+  }
+  
+  /* Input and select fields */
+  input,
+  select {
+    width: 100%;
+    max-width: 100%;
+    padding: 12px; /* Slightly larger padding for better touch */
+    margin: 10px 0;
+    /* margin-right: 10px; */
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+  }
+  
+  input:focus,
+  select:focus {
+    outline: none;
+    border-color: #007bff;
+    box-shadow: 0 0 8px rgba(0, 123, 255, 0.5);
+  }
+  
+  /* Buttons */
+  button {
+    width: 100%;
+    padding: 12px;
+    margin-top: 10px;
+    font-size: 1rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: transform 0.2s;
+  }
+  
+  button:hover {
+    transform: scale(1.03); /* Subtle hover effect */
+  }
+  
+  /* Primary button */
+  .btn-primary {
+    background-color: #007bff;
+    color: white;
+    transition: background-color 0.3s;
+  }
+  
+  .btn-primary:hover {
+    background-color: #0056b3;
+  }
+  
+  /* Secondary button */
+  .btn-secondary {
+    background-color: #6c757d;
+    color: white;
+    /* margin-top: 0; */
+    transition: background-color 0.3s;
+  }
+  
+  .btn-secondary:hover {
+    background-color: #565e64;
+  }
+  
+  /* Buttons container */
+  .form-buttons {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+  }
+  
+  /* Responsive design */
+  @media (max-width: 768px) {
+    .signup-container {
+      padding: 1.5rem; /* Adjust padding for smaller screens */
+      box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+    }
+  
+    h2 {
+      font-size: 1.8rem;
+    }
+  
+    h3 {
+      font-size: 1.3rem;
+    }
+  
+    button {
+      font-size: 0.9rem;
+      padding: 10px;
+    }
+    input,
+  select {
+    font-size: 0.9rem; /* Slightly smaller font size */
+    padding: 10px; /* Compact padding */
+  }
+  }
+  
+  @media (max-width: 480px) {
+    .signup-container {
+      margin: 2vh auto; /* Smaller margin for smaller screens */
+      padding: 1rem; /* Compact padding */
+    }
+  
+    h2 {
+      font-size: 1.5rem;
+    }
+  
+    h3 {
+      font-size: 1.2rem;
+    }
+    input,
+  select {
+    font-size: 0.85rem; /* Reduce font size for better fit */
+    padding: 8px; /* Smaller padding for mobile */
+  }
+  }
+  
