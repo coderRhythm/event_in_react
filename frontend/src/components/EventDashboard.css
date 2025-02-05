@@ -1,4 +1,4 @@
-/* General Container */
+
 .event-dashboard-container {
   max-width: 1200px;
   margin: 20px auto;
@@ -6,7 +6,6 @@
   text-align: center;
 }
 
-/* Heading */
 .eventDashHeading {
   font-size: 28px;
   font-weight: bold;
@@ -14,7 +13,6 @@
   margin-bottom: 20px;
 }
 
-/* Event List */
 .event-list {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -22,7 +20,6 @@
   justify-content: center;
 }
 
-/* Event Card */
 .event-card {
   background: #fff;
   border-radius: 12px;
@@ -38,7 +35,7 @@
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
 }
 
-/* Event Title */
+
 .event-title {
   font-size: 22px;
   font-weight: bold;
@@ -46,7 +43,6 @@
   color: #2c3e50;
 }
 
-/* Event Details */
 .event-category,
 .event-date,
 .event-venue,
@@ -56,7 +52,6 @@
   margin-bottom: 5px;
 }
 
-/* View Details Button */
 .view-details-button {
   margin-top: 10px;
   padding: 10px 15px;
@@ -73,7 +68,6 @@
   background-color: #0056b3;
 }
 
-/* Loading and Error Messages */
 .loading,
 .error {
   font-size: 18px;

@@ -21,9 +21,7 @@ const PrivateRoute = ({ children, allowedRoles }) => {
     return <Navigate to="/login" replace />;
   }
 
-  // if () {
-  //   return <Navigate to="/unauthorized" replace />; // Redirect if role is not allowed
-  // }
+
 
   return children;
 };

@@ -9,8 +9,7 @@ const ResetPassword = () => {
   const [message, setMessage] = useState('');
   const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
-  const navigate = useNavigate();  // Initialize the navigate hook
-
+  const navigate = useNavigate();  
   const handleResetPasswordSubmit = async (e) => {
     e.preventDefault();
 
@@ -29,7 +28,6 @@ const ResetPassword = () => {
       if (response.status === 200) {
         setMessage(response.data.message);
         setError('');
-        // After successful reset, wait for 2 seconds then navigate to login
         setTimeout(() => {
           navigate('/login');
         }, 2000);
@@ -43,7 +41,7 @@ const ResetPassword = () => {
   };
 
   const handleBackClick = () => {
-    navigate('/login'); // Replace with your actual path
+    navigate('/login');
   };
 
   return (

@@ -12,8 +12,7 @@ import mitLogo from '../assets/MIT_logo.png';
 import avatar1 from '../assets/avatar1.avif';
 import avatar2 from '../assets/avatar2.avif';
 import avatar3 from '../assets/avatar3.avif';
-import Loader from "./Loader"; // Import the Loader component
-// import './Faculty.css'
+import Loader from "./Loader"; 
 const Faculty = () => {
   const [events, setEvents] = useState([]);
   const [registeredEvents, setRegisteredEvents] = useState([]);
@@ -45,7 +44,7 @@ const [filteredEvents, setFilteredEvents] = useState([]);
     } catch (err) {
       setError(err.message);
     } finally {
-      setLoading(false); // Set loading to false once data is fetched
+      setLoading(false); 
     }
   };
 

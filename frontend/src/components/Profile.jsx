@@ -8,7 +8,7 @@ const Profile = () => {
     const fetchProfile = async () => {
       try {
         const response = await axios.get('http://localhost:5000/profile', {
-          withCredentials: true, // Ensure that cookies/session are sent
+          withCredentials: true, 
         });
         setUser(response.data.user);
       } catch (error) {

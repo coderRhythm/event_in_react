@@ -49,7 +49,7 @@ const EventMaker = () => {
   const handleFileChange = (e) => {
     const file = e.target.files[0];
     if (file && file.type.startsWith("image/")) {
-      setImageFile(file); // Store the selected file if it's an image
+      setImageFile(file); 
     } else {
       alert("Please upload a valid image file.");
     }
@@ -61,12 +61,10 @@ const EventMaker = () => {
     try {
       const formDataToSend = new FormData();
       
-      // Append form fields
       Object.entries(formData).forEach(([key, value]) => {
         if (value) formDataToSend.append(key, value);
       });
   
-      // Append image file if present
       if (imageFile) {
         formDataToSend.append("event_image", imageFile);
       }
@@ -80,7 +78,6 @@ const EventMaker = () => {
   
       console.log("Response:", response);
   
-      // Handle errors
       if (!response.ok) {
         const errorData = await response.json();
         throw new Error(errorData.error || "Failed to create event");
@@ -89,7 +86,6 @@ const EventMaker = () => {
       const newEvent = await response.json();
       console.log("Event created successfully:", newEvent);
   
-      // Update event list
       setEvents((prevEvents) => [...prevEvents, newEvent.event]);
   
       // Reset form
@@ -108,12 +104,11 @@ const EventMaker = () => {
         event_website: "",
         additional_notes: "",
         organization_name: "",
-        target_audience: "", // Reset target audience
+        target_audience: "", 
       });
   
-      setImageFile(null); // Reset image state
-      setStep(5); // Move to success step
-  
+      setImageFile(null); 
+      setStep(5); 
     } catch (error) {
       console.error("Error creating event:", error.message);
     }

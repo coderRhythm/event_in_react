@@ -1,6 +1,6 @@
-/* src/components/Navbar.css */
+
 .navbar {
-  background: rgb(0, 0, 0,0.3); /* Set background to transparent */
+  background: rgb(0, 0, 0,0.3);
   color: white;
   padding: 5px 0;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -10,7 +10,7 @@
   margin: 0 !important;
   width: 100% !important;
  
-  transition: all 1s ease; /* Smooth transition for background */
+  transition: all 1s ease; 
 }
 
 .profile-img{
@@ -18,7 +18,7 @@
 }
 
 .navbar.scrolled {
-  background-color: rgb(0, 0, 0,0.7); /* Dark gray with opacity */
+  background-color: rgb(0, 0, 0,0.7); 
   border-bottom: 4px solid;
   padding: 15px 0;
   border-image: linear-gradient(to right, #ff7f50, #ff1493, #1e90ff, #32cd32);
@@ -89,7 +89,7 @@
 .hamburger.open::after {
   display: none;
 }
-/* Close button in mobile menu */
+
 
 
 
@@ -128,13 +128,13 @@
 }
 
 .profile-logo {
-  font-size: 3rem; /* Icon size */
-  color: white; /* Icon color */
+  font-size: 3rem; 
+  color: white; 
 }
 
 .profile-dropdown {
   position: absolute;
-  top: 30px; /* Position dropdown below the icon */
+  top: 30px; 
   right: 0;
   background-color: #333;
   color: white;
@@ -213,7 +213,7 @@
     top: 10px;
     width: 100vw;
     text-align: start;
-    left: 0px; /* Move to the left */
+    left: 0px;
     color: rgb(231, 231, 231);
     font-size: 2rem;
     cursor: pointer;
@@ -233,7 +233,7 @@
     top: 10px;
     /* width: 100%  ; */
     text-align: start;
-    left: 10px; /* Move to the left */
+    left: 10px; 
     color: rgb(231, 231, 231);
     font-size: 3rem;
     cursor: pointer;
@@ -246,8 +246,8 @@
    
     display: flex;
     flex-direction: column;
-    align-items: flex-start; /* Align items to the left */
-    justify-content: center; /* Center vertically */
+    align-items: flex-start; 
+    justify-content: center; 
     width: 100%;
     background-color: rgba(0, 0, 0, 0.9);
     position: fixed;
@@ -255,7 +255,7 @@
     left: -100%;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     transition: left 0.3s ease;
-    padding-left: 20px; /* Ensure content is left-aligned with spacing */
+    padding-left: 20px; 
 }
 
 .navbar-links.active {

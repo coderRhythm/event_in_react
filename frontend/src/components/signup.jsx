@@ -15,7 +15,7 @@ const Signup = () => {
   const handleChange = (e) => {
     const { name, value } = e.target;
     if (["prn", "course", "branch", "year", "facultyId", "department", "designation", "organizationName", "eventManagerId", "experience"].includes(name)) {
-      // Update additionalInfo
+     
       setFormData((prevState) => ({
         ...prevState,
         additionalInfo: {

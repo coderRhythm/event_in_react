@@ -13,12 +13,12 @@ const EventDashboard = () => {
       try {
         const response = await fetch("http://localhost:5000/event/dashboard", {
           method: "GET",
-          credentials: "include", // Ensure cookies are sent
+          credentials: "include", 
         });
 
         if (response.status==200) {
           const data = await response.json();
-          setEvents(data.events);  // Assuming the backend sends events data
+          setEvents(data.events);  
           setLoading(false);
         } else {
             
@@ -34,7 +34,6 @@ const EventDashboard = () => {
   }, []);
 
   const handleGoToEventDetail = (eventId) => {
-    // Navigate to the specific event detail page
     navigate(`/event/detail/${eventId}`);
   };
 

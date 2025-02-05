@@ -23,10 +23,9 @@ const Navbar = () => {
   
     const fetchProfileImage = async () => {
       let profilePhoto = Cookies.get('profilePhoto');
-      console.log('retrieved Photo from Cookie:', profilePhoto); // Debugging
-  
+      console.log('retrieved Photo from Cookie:', profilePhoto); 
       while (!profilePhoto) {
-        await new Promise((resolve) => setTimeout(resolve, 500)); // Check every 500ms
+        await new Promise((resolve) => setTimeout(resolve, 500)); 
         profilePhoto = Cookies.get('profilePhoto');
       }
       
@@ -83,15 +82,14 @@ const Navbar = () => {
           className="profile-img"
           onError={(e) => {
             console.log("Failed to load image:", profileImage);
-            e.target.src = mitLogo; // Fallback image if the profile image fails to load
-          }}
+            e.target.src = mitLogo; 
+         }}
         />
       ) : (
         // If there's no profile image, show the FaUser icon
         <div className="profile-placeholder">
           <FaUser className="profile-img" />
-          {/* <p>No profile image available</p> */}
-        </div>
+          </div>
       )}
     {/* </div> */}
           </div>

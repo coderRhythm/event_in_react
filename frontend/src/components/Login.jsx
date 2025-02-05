@@ -1,21 +1,19 @@
 import React, { useState, useRef, useEffect } from 'react';
 import './Login.css';
 import { useNavigate } from 'react-router-dom';
-import mitLogo from '../assets/MIT_logo.png'; // Adjust the path to where you store your MIT logo
-import LoadingSpinner from './LoadingSpinner'; // Import the spinner
+import mitLogo from '../assets/MIT_logo.png'; 
+import LoadingSpinner from './LoadingSpinner'; 
 
 const Login = ({ setIsForgotPasswordFlow }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
-  const [isLoading, setIsLoading] = useState(false);  // Loading state
+  const [isLoading, setIsLoading] = useState(false);
 
   const navigate = useNavigate();
   
-  // Create a reference to focus the email input
   const emailInputRef = useRef(null);
 
-  // Automatically focus on the email input when the component is mounted
   useEffect(() => {
     emailInputRef.current.focus();
   }, []);
@@ -35,7 +33,7 @@ const Login = ({ setIsForgotPasswordFlow }) => {
     const loginData = { email, password };
     
     try {
-      setIsLoading(true); // Start loading
+      setIsLoading(true); 
 
       const response = await fetch('http://localhost:5000/login', {
         method: 'POST',
@@ -43,13 +41,13 @@ const Login = ({ setIsForgotPasswordFlow }) => {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(loginData),
-        credentials: 'include'  // Ensure cookies are included in the request
-      });
+        credentials: 'include'  
+         });
 
       const result = await response.json();
       console.log("result loginka: ", result);
 
-      setIsLoading(false); // Stop loading
+      setIsLoading(false);
 
       if (response.ok) {
         const role = result.user.role;
@@ -66,12 +64,12 @@ const Login = ({ setIsForgotPasswordFlow }) => {
     } catch (error) {
       console.log(error);
       setError('Error during login. Please try again.');
-      setIsLoading(false); // Stop loading
+      setIsLoading(false); 
     }
   };
 
   const handleForgotPassword = () => {
-    setIsForgotPasswordFlow(true); // Set flow state
+    setIsForgotPasswordFlow(true); 
     navigate('/forgot-password');
   };
 
@@ -81,10 +79,9 @@ const Login = ({ setIsForgotPasswordFlow }) => {
 
   return (
     <div className="login-container">
-      {/* Display loading spinner while logging in */}
       {isLoading && <LoadingSpinner />}
 
-      <img src={mitLogo} alt="MIT Logo" className="mit-logo" /> {/* MIT Logo */}
+      <img src={mitLogo} alt="MIT Logo" className="mit-logo" /> 
       <h2 className="login-title">Login</h2>
 
       <form onSubmit={handleManualLogin} className="login-form">
@@ -92,7 +89,7 @@ const Login = ({ setIsForgotPasswordFlow }) => {
           <input
             type="email"
             id="email"
-            ref={emailInputRef} // Attach the ref to the email input
+            ref={emailInputRef} 
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
