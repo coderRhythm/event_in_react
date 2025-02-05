@@ -1,144 +1,295 @@
 /* src/components/Navbar.css */
 .navbar {
-    background: linear-gradient(135deg, #010102, #656262); /* Gradient background */
-    color: white;
-   padding: 15px 0;/* Adjusted padding */
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow */
-    position: fixed;
-    top: 0;
-    z-index: 1000;
-    width: 100% !important; /* Ensure navbar spans full width */
-  }
-  
-  .navbar-container {
-    display: flex;
+  background: rgb(0, 0, 0,0.3); /* Set background to transparent */
+  color: white;
+  padding: 5px 0;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  position: fixed;
+  top: 0;
+  z-index: 1000;
+  margin: 0 !important;
+  width: 100% !important;
+ 
+  transition: all 1s ease; /* Smooth transition for background */
+}
 
-    justify-content: space-between;
-    align-items: center;
-    /* max-width: 1200px; */
-    margin: 0 auto;
-    padding: 0 20px; /* Add padding to container */
+.profile-img{
+  color: black;
+}
+
+.navbar.scrolled {
+  background-color: rgb(0, 0, 0,0.7); /* Dark gray with opacity */
+  border-bottom: 4px solid;
+  padding: 15px 0;
+  border-image: linear-gradient(to right, #ff7f50, #ff1493, #1e90ff, #32cd32);
+  border-image-slice: 1;
+  /* border-image: none; Remove gradient border */
+}
+
+
+.navbar-container {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.navbar-brand img{
+  color: white;
+  height: 70px;
+  border-radius: 50%;
+  text-decoration: none;
+  font-size: 1.8rem;
+  font-weight: bold;
+  font-family: 'Poppins', sans-serif;
+  letter-spacing: 1px;
+}
+
+.navbar-toggle {
+  display: none;
+  cursor: pointer;
+}
+
+.hamburger {
+  width: 30px;
+  height: 3px;
+  margin-right: 20px;
+  background-color: white;
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.hamburger::before,
+.hamburger::after {
+  content: '';
+  position: absolute;
+  width: 30px;
+  height: 3px;
+  background-color: white;
+  transition: all 0.3s ease;
+}
+
+.hamburger::before {
+  transform: translateY(-8px);
+}
+
+.hamburger::after {
+  transform: translateY(8px);
+}
+
+.hamburger.open {
+  background-color: transparent;
+}
+
+.hamburger.open::before {
+  display: none;
+}
+
+.hamburger.open::after {
+  display: none;
+}
+/* Close button in mobile menu */
+
+
+
+.navbar-links {
+  list-style: none;
+  display: flex;
+  margin: 0;
+  padding: 0;
+
+}
+
+.navbar-links li {
+  margin-left: 25px;
+}
+
+.navbar-links a {
+  color: white;
+  text-decoration: none;
+  font-size: 1.5rem;
+  font-weight: 500;
+  font-weight: bolder;
+  font-family: 'Poppins', sans-serif;
+  padding: 0px 20px;
+  border-radius: 5px;
+  transition: all 0.3s ease;
+}
+
+.navbar-links a:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  transform: translateY(-2px);
+}
+/* Profile Icon and Dropdown Menu */
+.profile-container {
+  position: relative;
+  cursor: pointer;
+}
+
+.profile-logo {
+  font-size: 3rem; /* Icon size */
+  color: white; /* Icon color */
+}
+
+.profile-dropdown {
+  position: absolute;
+  top: 30px; /* Position dropdown below the icon */
+  right: 0;
+  background-color: #333;
+  color: white;
+  padding: 10px;
+  border-radius: 5px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.profile-dropdown button {
+  background: none;
+  color: white;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+.profile-dropdown button:hover {
+  background-color: #444;
+}
+/* Navbar.css */
+.profile-container {
+  position: relative;
+  cursor: pointer;
+}
+
+.profile-logo {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #f0f0f0;
+}
+
+.profile-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.profile-dropdown {
+  position: absolute;
+  top: 50px;
+  right: 0;
+  background-color: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  padding: 10px;
+  z-index: 1000;
+}
+
+.profile-dropdown button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  color: #333;
+}
+
+.profile-dropdown button:hover {
+  color: #007bff;
+}
+@media(max-width: 468px)
+{
+  .navbar-brand img{
+    display: none;
   }
-  
-  .navbar-brand a {
-    color: white;
-    text-decoration: none;
-    font-size: 1.8rem;
-    font-weight: bold;
-    font-family: 'Poppins', sans-serif; /* Modern font */
-    letter-spacing: 1px;
-  }
-  
-  .navbar-toggle {
-    display: none; /* Hide by default (visible only on mobile) */
+  .close-btn button {
+    background: none;
+    border: none;
+    position: absolute;
+    top: 10px;
+    width: 100vw;
+    text-align: start;
+    left: 0px; /* Move to the left */
+    color: rgb(231, 231, 231);
+    font-size: 2rem;
     cursor: pointer;
   }
   
-  .hamburger {
-    width: 30px;
-    height: 3px;
-    margin-right: 20px;
-    background-color: white;
-    position: relative;
-    transition: all 0.3s ease;
+}
+/* Responsive Styles */
+@media (max-width: 1024px) {
+  .navbar-toggle {
+    display: block;
   }
-  
-  .hamburger::before,
-  .hamburger::after {
-    content: '';
+
+  .close-btn button {
+    background: none;
+    border: none;
     position: absolute;
-    width: 30px;
-    height: 3px;
-    background-color: white;
-    transition: all 0.3s ease;
+    top: 10px;
+    /* width: 100%  ; */
+    text-align: start;
+    left: 10px; /* Move to the left */
+    color: rgb(231, 231, 231);
+    font-size: 3rem;
+    cursor: pointer;
   }
-  
-  .hamburger::before {
-    transform: translateY(-8px);
+  .navbar-container{
+    padding: 20px;
   }
-  
-  .hamburger::after {
-    transform: translateY(8px);
-  }
-  
-  .hamburger.open {
-    background-color: transparent;
-  }
-  
-  .hamburger.open::before {
-    transform: rotate(45deg);
-  }
-  
-  .hamburger.open::after {
-    transform: rotate(-45deg);
-  }
-  
   .navbar-links {
-    list-style: none;
+    height: 100vh;
+   
     display: flex;
-    margin: 0;
-    padding: 0;
-  }
-  
+    flex-direction: column;
+    align-items: flex-start; /* Align items to the left */
+    justify-content: center; /* Center vertically */
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.9);
+    position: fixed;
+    top: 0;
+    left: -100%;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: left 0.3s ease;
+    padding-left: 20px; /* Ensure content is left-aligned with spacing */
+}
+
+.navbar-links.active {
+
+    left: 0;
+}
+
+.navbar-brand img {
+    display: none;
+}
+
+
   .navbar-links li {
-    margin-left: 25px;
+    margin: 10px 0;
+    
+ 
   }
-  
+
   .navbar-links a {
-    color: white;
-    text-decoration: none;
-    font-size: 1.1rem;
-    font-weight: 500;
-    font-family: 'Poppins', sans-serif;
-    padding: 8px 12px;
-    border-radius: 5px;
-    transition: all 0.3s ease;
+    padding-left:  45px;
+    padding-top: 30px;
+    text-align: left;
+    width: 100%;
+    font-size: 2.5rem;
+    display: block;
+    
   }
-  
+
   .navbar-links a:hover {
-    background-color: rgba(255, 255, 255, 0.1); /* Hover effect */
-    transform: translateY(-2px);
+    background-color: rgba(255, 255, 255, 0.1);
   }
-  
-  /* Responsive Styles */
-  @media (max-width: 768px) {
-    .navbar-toggle {
-      display: block;
-      /* font-size Show hamburger menu on mobile */
-    }
-  
-    .navbar-links {
-      height: 100vh;
-      display: flex; /* Always flex, but hidden off-screen */
-      flex-direction: column;
-      width: 100%;
-      background-color: rgba(0, 0, 0, 0.9); /* Semi-transparent background */
-      position: fixed; /* Fixed to cover the entire screen */
-      top: 70px;
-      left: -100%; /* Start off-screen */
-      padding: 10px 0;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-      transition: left 0.3s ease; /* Smooth sliding animation */
-    }
-  
-    .navbar-links.active {
-      left: 0; /* Slide in from left to right */
-      padding-top: 100px;
-    }
-  
-    .navbar-links li {
-      margin: 20px 0;
-      text-align: center;
-    }
-  
-    .navbar-links a {
-      padding: 15px;
-      width: 100%;
-      font-size: 1.5rem;
-      display: block;
-    }
-  
-    .navbar-links a:hover {
-      background-color: rgba(255, 255, 255, 0.1);
-    }
+  .close-btn button {
+   
+   cursor: pointer;
   }
+
+}

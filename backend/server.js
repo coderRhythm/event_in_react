@@ -54,7 +54,7 @@ const upload = multer({
         resave: true,
         saveUninitialized: false,
         cookie: {
-            httpOnly: true,    
+            // httpOnly: true,    
             secure: false,     
             maxAge: 24 * 60 * 60 * 1000 
         }
@@ -77,19 +77,28 @@ app.use("/uploads", express.static("uploads"));
                 return done(new Error('Models not initialized'), false);
             }
     
-            const { id, displayName, emails } = profile;
+            
+            const { id, displayName, emails, photos } = profile; // Retrieve photos as well
+// const email = emails[0].value;
+
+// Fetch profile photo URL if available
+const profilePhoto = photos && photos.length > 0 ? photos[0].value : null;
+
+console.log("Profile Photo:", profilePhoto);
+
             const email = emails[0].value;
             console.log("email: ", email);
             
-            const password = null;  
-            const role = 'User';    
+            // const password = null;  
+            // const role = 'User';    
             
             let user = await models.User.findOne({ where: { email } });
             if(!user)
             {
                 return done(null, false, { message: "User not found. Please register first." });
             }
-    
+            user.profilePhoto = profilePhoto;
+            await user.save();
             return done(null, user);
         } catch (error) {
             console.error(error);
@@ -110,74 +119,112 @@ app.use("/uploads", express.static("uploads"));
             done(error, false);
         }
     });
-    app.get('/verify-auth', async (req, res) => {
-        const userId = await req.cookies.userId;
+    app.get('/verify-auth', (req, res) => {
+        const userId = req.cookies.userId;
+        const profilePhoto = req.cookies.profilePhoto; // Retrieve profile photo from cookies
         console.log("user id in auth:", userId);
-        
-  if (userId) {
-    res.json({ 
-      authenticated: true, 
-      role: req.cookies.userRole 
+    
+        if (userId) {
+            res.json({
+                authenticated: true,
+                role: req.cookies.userRole,
+                profilePhoto: profilePhoto // Send profile photo to frontend
+            });
+        } else {
+            res.status(401).json({ authenticated: false });
+        }
     });
-  } else {
-    res.status(401).json({ authenticated: false });
-  }
-});
     app.get('/auth/google', passport.authenticate('google', {
         scope: ['profile', 'email']
     }));
     
+
+
     app.get('/auth/google/callback', passport.authenticate('google', {
         failureRedirect: 'http://localhost:5173/login',
     }), async (req, res) => {
         try {
             console.log("Inside the auth callback");
             console.log("User ID from req.user:", req.user.id);
+    
             const model = await connection();
-            res.cookie('userId', req.user.id, { httpOnly: true, maxAge: 24 * 60 * 60 * 1000 });
             const user = req.user;
-            res.cookie("userRole", req.user.role,{ httpOnly: true, maxAge: 24 * 60 * 60 * 1000 })
+    
+            // Set cookies
+            res.cookie('userId', user.id, { maxAge: 24 * 60 * 60 * 1000 });
+            res.cookie('userRole', user.role, { maxAge: 24 * 60 * 60 * 1000 });
+            res.cookie('profilePhoto', user.profilePhoto, { maxAge: 24 * 60 * 60 * 1000 }); // Set profile photo in cookies
+    
             if (!user) {
                 res.status(404).json({ message: 'User not found' });
                 return;
             }
     
             console.log("User role:", user.role);
-    
-            if (user.role === 'student') {
-                res.redirect("http://localhost:5173/student");
-            } else if (user.role === 'faculty') {
-                res.redirect("http://localhost:5173/faculty");
-            } 
-            else if(user.role==='eventManager')
+            if(user)
             {
-                const eventManager = await model.EventManager.findOne({
-                    where: { user_id: user.id }
-                });
-                console.log("event_manager info: ", eventManager);
-                
-                
-                res.cookie("eventManagerId", eventManager.id, {
-                    httpOnly: true,
-                    secure: false,
-                    expires: new Date(Date.now() + 3600000),
-                });
-
-                res.cookie("experience", eventManager.experience, {
-                    httpOnly: true,
-                    secure: false,
-                    expires: new Date(Date.now() + 3600000),
-                });
-
-                res.redirect("http://localhost:5173/eventManager");
+                if (user.role === 'student') {
+                    res.redirect("http://localhost:5173/student");
+                } else if (user.role === 'faculty') {
+                    res.redirect("http://localhost:5173/faculty");
+                } else if (user.role === 'eventManager') {
+                    const eventManager = await model.EventManager.findOne({
+                        where: { user_id: user.id }
+                    });
+                    console.log("event_manager info: ", eventManager);
+        
+                    res.cookie("eventManagerId", eventManager.id, {
+                        secure: false,
+                        expires: new Date(Date.now() + 3600000),
+                    });
+        
+                    res.cookie("experience", eventManager.experience, {
+                        secure: false,
+                        expires: new Date(Date.now() + 3600000),
+                    });
+        
+                    res.redirect("http://localhost:5173/eventManager");
+                }
             }
+            
         } catch (error) {
             console.error("Error during authentication callback:", error);
             res.status(500).json({ message: "Internal server error" });
         }
     });
+
+    app.post('/logout', async (req, res) => {
+        try {
+            res.clearCookie('userId', { path: '/' });
+            res.clearCookie('userRole', { path: '/' });
     
+            res.status(200).json({ message: 'Logged out successfully' });
+        } catch (e) {
+            console.error(e);
+            res.status(500).json({ message: "Internal Logout error" });
+        }
+    });
     
+    app.get("/student/register", async (req, res)=>{
+        try{
+
+            const userId = req.cookies.userId;
+            if(!userId)
+            {
+                res.status(400).json({error: "User not found"});
+            }
+
+            const model = await connection();
+            const user = await model.User.findOne({
+                where: { id: userId }
+                });
+            
+        }
+        catch(e)
+        {
+
+        }
+    })
     app.get("/student/studentDetails", async (req, res) => {
         try {
             const userId = req.cookies.userId;
@@ -217,13 +264,13 @@ app.use("/uploads", express.static("uploads"));
                 console.log("User ID:", user.id);
                 
                 res.cookie("userId", user.id, {
-                    httpOnly: true,
+                    
                     secure: false,
                     expires: new Date(Date.now() + 3600000),
                 });
     
                 res.cookie("userRole", user.role, {
-                    httpOnly: true,
+                    
                     secure: false,
                     expires: new Date(Date.now() + 3600000),
                 });
@@ -242,13 +289,13 @@ app.use("/uploads", express.static("uploads"));
                             };
     
                             res.cookie("eventManagerId", eventManager.id, {
-                                httpOnly: true,
+                               
                                 secure: false,
                                 expires: new Date(Date.now() + 3600000),
                             });
     
                             res.cookie("experience", eventManager.experience, {
-                                httpOnly: true,
+                                
                                 secure: false,
                                 expires: new Date(Date.now() + 3600000),
                             });
@@ -354,7 +401,7 @@ app.use("/uploads", express.static("uploads"));
           event_title, event_category, event_description, event_date,
           event_time, event_venue, expected_participants, organizer_name,
           organizer_email, organizer_phone, sponsorship_info, event_website,
-          additional_notes, organization_name
+          additional_notes, organization_name, target_audience
         } = req.body;
       
         const event_manager_id = req.cookies.eventManagerId;
@@ -366,21 +413,22 @@ app.use("/uploads", express.static("uploads"));
       
         try {
           const models = await connection();
-          const user = await models.EventRegister.create({
+          const newEvent = await models.EventRegister.create({
             event_title, event_category, event_description, event_date,
             event_time, event_venue, expected_participants, organizer_name,
             organizer_email, organizer_phone, sponsorship_info, event_website,
-            additional_notes, organization_name, event_manager_id, experience,
+            additional_notes, organization_name, target_audience, event_manager_id, experience,
             event_image: req.file ? `/uploads/${req.file.filename}` : null, // Save correct path
+            status: 'pending' // Default status set to "pending"
           });
       
-          return res.status(201).json({ message: "Event created successfully", event: user });
+          return res.status(201).json({ message: "Event created successfully", event: newEvent });
         } catch (error) {
           console.error("Error creating event:", error);
           return res.status(500).json({ error: "Internal server error" });
         }
       });
-    
+      
       
     
       app.post('/addUser', async (req, res) => {

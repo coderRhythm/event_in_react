@@ -63,6 +63,18 @@ const eventRegisterSchema = (sequelize) => {
       type: DataTypes.STRING, 
       allowNull: false,
     },
+    // New Field: Specifies the target audience (Student, Faculty, or Both)
+    target_audience: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        isIn: {
+          args: [['Student', 'Faculty', 'both']], // Specify allowed values here
+          msg: 'Target Audience must be one of: Student, Faculty, or both', // Updated error message
+        },
+      },
+    },
+    
     // Foreign Key for Event Manager
     event_manager_id: {
       type: DataTypes.INTEGER, // Ensure it is INTEGER to match 'eventManagerId' in eventManager model
@@ -77,6 +89,20 @@ const eventRegisterSchema = (sequelize) => {
       type: DataTypes.STRING, 
       allowNull: true,
     },
+
+    // New column: admin status (pending or assigned)
+    status: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      defaultValue: 'pending', // Default status is "pending"
+      validate: {
+        isIn: {
+          args: [['pending', 'assigned']], // Valid statuses
+          msg: 'Status must be either "pending" or "assigned"',
+        },
+      },
+    },
+
   }, {
     tableName: 'events', // Explicitly define table name
     timestamps: true, 

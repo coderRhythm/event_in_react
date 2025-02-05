@@ -2,7 +2,8 @@
   background: linear-gradient(135deg, #f4f4f4, #ffffff);
   padding: 2rem;
   border-radius: 16px;
-  max-width: 400px;
+  max-width: 584px;
+  
   width: 100%;
   position: absolute;
   top: 50%;
@@ -18,7 +19,7 @@
   font-size: 1.8rem;
   font-weight: 700;
   color: #003366;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1.2rem; /* Reduced margin */
   letter-spacing: 2px;
   text-transform: uppercase;
   font-family: 'Poppins', sans-serif;
@@ -32,12 +33,11 @@
   background: #4285F4;
   color: #fff;
   padding: 1rem;
-  /* border: 2px solid #006400; */
   font-size: 1rem;
   font-weight: bold;
   cursor: pointer;
-  width: 100%;
-  margin-bottom: 1rem;
+  width: 100%; /* Make it full width */
+  margin-bottom: 0.8rem; /* Adjusted margin */
 }
 
 .google-login-btn img {
@@ -46,7 +46,15 @@
 
 .form-group {
   text-align: left;
-  margin: 1.5rem 0;
+  margin: 1rem 0; /* Reduced margin */
+}
+
+.otherBtns {
+  display: flex;
+  flex-direction: column; /* Stack buttons vertically */
+  gap: 10px; /* Adjusted gap */
+  justify-content: center;
+  width: 100%; /* Make it full width */
 }
 
 label {
@@ -63,6 +71,7 @@ label {
   background: #fafafa;
   color: #333;
   outline: none !important;
+  padding: 0.8rem;
 }
 
 .input-field:focus {
@@ -74,11 +83,25 @@ label {
   font-size: 0.9rem;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  gap: 20px;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.content p {
+  font-size: 1.4rem; /* Reduced font size */
+  opacity: 0.5;
+  font-weight: bolder;
+  margin-right: 40px;
 }
 
 .forgot-password a {
   text-decoration: none;
+  width: 45%;
   color: rgb(102, 102, 102);
   font-size: large;
 }
@@ -96,7 +119,9 @@ label {
   color: #fff;
   font-weight: bold;
   cursor: pointer;
-  width: 50%;
+  width: 50%; /* Full width on smaller screens */
+  padding: 1rem;
+  margin-bottom: 0.8rem; /* Adjusted margin */
 }
 
 .signup-text {
@@ -115,10 +140,11 @@ label {
   color: #f90;
 }
 
-@media (max-width: 480px) {
+/* Media Queries */
+@media (max-width: 768px) {
   .login-container {
     padding: 1.5rem;
-    max-width: 320px;
+    max-width: 400px;
   }
 
   .login-title {
@@ -126,12 +152,59 @@ label {
   }
 
   .input-field {
+    padding: 1rem;
+    font-size: 1rem;
+  }
+
+  .login-btn, .google-login-btn {
+    padding: 1rem;
+    font-size: 1.1rem;
+    width: 100%; /* Full width */
+  }
+
+  .otherBtns {
+    flex-direction: column; /* Stack buttons vertically */
+    width: 100%;
+    gap: 1rem;
+  }
+
+  .forgot-password {
+    margin-bottom: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .login-container {
+    padding: 1rem;
+    max-width: 320px;
+  }
+
+  .login-title {
+    font-size: 1.4rem;
+  }
+
+  .input-field {
     padding: 0.8rem;
     font-size: 1rem;
+    width: 100%;
   }
 
   .login-btn, .google-login-btn {
     padding: 0.8rem;
     font-size: 1rem;
+    width: 100%; /* Full width on smaller screens */
+  }
+
+  .forgot-password a {
+    width: 100%;
+    text-align: center;
+  }
+
+  .content p {
+    font-size: 1.2rem;
+  }
+
+  .otherBtns button {
+    width: 100%; /* Full width on smaller screens */
   }
 }

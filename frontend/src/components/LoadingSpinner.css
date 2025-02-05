@@ -1,0 +1,14 @@
+/* LoadingSpinner.css */
+.loader-container {
+    position: fixed;  /* Ensure the loader is fixed on the screen */
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;  /* Take full viewport height */
+    width: 100%;    /* Take full viewport width */
+    background-color: rgba(255, 255, 255, 0.8); /* Optional: Semi-transparent background */
+    z-index: 9999;  /* Ensure the loader appears on top of other content */
+  }
+  
