@@ -11,15 +11,15 @@ const connection = async () => {
         await sequelize.authenticate();
         console.log('Connection has been established successfully.');
 
-        const models = initModels(sequelize);  // Initialize models here
+        const models = initModels(sequelize);  
 
-        await sequelize.sync({ alter: true }); // Use alter if needed to update table schemas without dropping
+        await sequelize.sync({ alter: true }); 
         console.log('All models were synced successfully.');
 
-        return models;  // Return the initialized models
+        return models; 
     } catch (error) {
         console.error('Unable to connect to the database:', error);
-        throw error;  // Throw error if connection fails
+        throw error;  
     }
 };
 

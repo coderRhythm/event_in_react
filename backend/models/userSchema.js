@@ -11,27 +11,27 @@ const createUserModel = (sequelize) => {
       },
       name: {
         type: DataTypes.STRING,
-        allowNull: false, // Name is required
+        allowNull: false, 
       },
       email: {
         type: DataTypes.STRING,
-        unique: true, // Ensures unique emails
+        unique: true, 
         allowNull: false,
       },
       password: {
         type: DataTypes.STRING,
-        allowNull: true, // Password is required
+        allowNull: true, 
       },
       role: {
         type: DataTypes.ENUM('student', 'faculty', 'eventManager', 'User'),
         allowNull: false,
-        defaultValue: 'User', // Default role
+        defaultValue: 'User', 
       },
     },
     {
       tableName: 'users',
-      timestamps: true, // Enables createdAt and updatedAt timestamps
-      underscored: true, // Uses snake_case column names in the database
+      timestamps: true, 
+      underscored: true, 
     }
   );
 };

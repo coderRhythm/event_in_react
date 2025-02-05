@@ -12,30 +12,30 @@ const createFacultyModel = (sequelize) => {
       facultyId: {
         type: DataTypes.STRING,
         unique: true,
-        allowNull: false, // Faculty ID is required
+        allowNull: false,
       },
       department: {
         type: DataTypes.STRING,
-        allowNull: false, // Department is required
+        allowNull: false, 
       },
       designation: {
         type: DataTypes.STRING,
-        allowNull: false, // Designation is required
+        allowNull: false, 
       },
       userId: {
         type: DataTypes.INTEGER,
         references: {
-          model: 'users', // Name of the User table
+          model: 'users', 
           key: 'id',
         },
-        onDelete: 'CASCADE', // Delete Faculty if User is deleted
-        onUpdate: 'CASCADE', // Update faculty if User ID changes
+        onDelete: 'CASCADE', 
+        onUpdate: 'CASCADE', 
       },
     },
     {
-      tableName: 'faculties', // Explicitly define table name
-      timestamps: true, // Enable createdAt and updatedAt
-      underscored: true, // Use snake_case for column names
+      tableName: 'faculties', 
+      timestamps: true, 
+      underscored: true, 
     }
   );
 };

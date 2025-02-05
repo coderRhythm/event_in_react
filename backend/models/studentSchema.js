@@ -12,34 +12,34 @@ const createStudentModel = (sequelize) => {
       prn: {
         type: DataTypes.STRING,
         unique: true,
-        allowNull: false, // PRN is required
+        allowNull: false, 
       },
       course: {
         type: DataTypes.STRING,
-        allowNull: false, // Course is required
+        allowNull: false, 
       },
       branch: {
         type: DataTypes.STRING,
-        allowNull: false, // Branch is required
+        allowNull: false, 
       },
       year: {
         type: DataTypes.INTEGER,
-        allowNull: false, // Year is required
+        allowNull: false, 
       },
       userId: {
         type: DataTypes.INTEGER,
         references: {
-          model: 'users', // Name of the User table
-          key: 'id', // Primary key in the User table
+          model: 'users', 
+          key: 'id', 
         },
-        onDelete: 'CASCADE', // Delete Student if associated User is deleted
-        onUpdate: 'CASCADE', // Update userId in Student if User's id is updated
+        onDelete: 'CASCADE', 
+        onUpdate: 'CASCADE', 
       },
     },
     {
-      tableName: 'students', // Explicitly define table name for consistency
-      timestamps: true, // Enable createdAt and updatedAt
-      underscored: true, // Use snake_case in DB column names
+      tableName: 'students', 
+      timestamps: true, 
+      underscored: true, 
     }
   );
 };

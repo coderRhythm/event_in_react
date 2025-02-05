@@ -1,6 +1,5 @@
 const { DataTypes } = require('sequelize');
 
-// Define the Event Register Schema
 const eventRegisterSchema = (sequelize) => {
   return sequelize.define('eventRegisterSchema', {  
     event_title: {
@@ -69,21 +68,21 @@ const eventRegisterSchema = (sequelize) => {
       allowNull: false,
       validate: {
         isIn: {
-          args: [['Student', 'Faculty', 'both']], // Specify allowed values here
-          msg: 'Target Audience must be one of: Student, Faculty, or both', // Updated error message
+          args: [['Student', 'Faculty', 'both']], 
+          msg: 'Target Audience must be one of: Student, Faculty, or both', 
         },
       },
     },
     
     // Foreign Key for Event Manager
     event_manager_id: {
-      type: DataTypes.INTEGER, // Ensure it is INTEGER to match 'eventManagerId' in eventManager model
+      type: DataTypes.INTEGER, 
       allowNull: false,
       references: {
-        model: 'event_managers', // Ensure this matches the table name of eventManagers
-        key: 'id', // Referring to the 'eventManagerId' column in eventManagers
+        model: 'event_managers', 
+        key: 'id', 
       },
-      onDelete: 'CASCADE', // This will delete associated records in eventRegister when eventManager is deleted
+      onDelete: 'CASCADE', 
     },
     experience: {
       type: DataTypes.STRING, 
@@ -94,17 +93,17 @@ const eventRegisterSchema = (sequelize) => {
     status: {
       type: DataTypes.STRING,
       allowNull: false,
-      defaultValue: 'pending', // Default status is "pending"
+      defaultValue: 'pending',
       validate: {
         isIn: {
-          args: [['pending', 'assigned']], // Valid statuses
+          args: [['pending', 'assigned']],
           msg: 'Status must be either "pending" or "assigned"',
         },
       },
     },
 
   }, {
-    tableName: 'events', // Explicitly define table name
+    tableName: 'events',
     timestamps: true, 
     underscored: true, 
   });

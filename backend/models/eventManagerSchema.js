@@ -11,31 +11,31 @@ const createEventManagerModel = (sequelize) => {
       },
       organizationName: {
         type: DataTypes.STRING,
-        allowNull: false, // Organization Name is required
+        allowNull: false, 
       },
       eventManagerId: {
-        type: DataTypes.INTEGER, // This matches the field used in the 'events' model
+        type: DataTypes.INTEGER, 
         unique: true,
-        allowNull: false, // Event Manager ID is required
+        allowNull: false,
       },
       experience: {
         type: DataTypes.STRING,
-        allowNull: true, // Experience is optional
+        allowNull: true, 
       },
       userId: {
         type: DataTypes.INTEGER,
         references: {
-          model: 'users', // Name of the User table
+          model: 'users', 
           key: 'id',
         },
-        onDelete: 'CASCADE', // Delete EventManager if User is deleted
-        onUpdate: 'CASCADE', // Update userId in EventManager if User ID changes
+        onDelete: 'CASCADE',
+        onUpdate: 'CASCADE', 
       },
     },
     {
-      tableName: 'event_managers', // Explicitly define table name
-      timestamps: true, // Enable createdAt and updatedAt
-      underscored: true, // Use snake_case for column names
+      tableName: 'event_managers', 
+      timestamps: true,
+      underscored: true,
     }
   );
 };
