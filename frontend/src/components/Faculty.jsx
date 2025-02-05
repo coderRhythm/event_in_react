@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import "./Student.css";
+// import "./Student.css";
 import Navbar from "./Navbar";
 import { useSpring, animated, config } from "@react-spring/web";
 import { useInView } from "react-intersection-observer";
@@ -194,7 +194,7 @@ const [filteredEvents, setFilteredEvents] = useState([]);
       ) : error ? ( 
         <p className="error-message">Error: {error}</p>
       ) : (
-        <div className="event-grid">
+        <div className="event-grid1">
           {filteredEvents.slice(0, showAll ? filteredEvents.length : 3).map((event) => (
             <div key={event.id} className="event-card">
               {event.event_image && (
