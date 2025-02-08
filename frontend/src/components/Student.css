@@ -9,7 +9,7 @@
   align-items: center !important;
   /* text-align: center !important; */
   justify-content: center !important;
-  border-bottom: 1px solid #ddd !important; /* Light border */
+  border-bottom: 1px solid #ddd !important; 
 }
 
 .section h1,
@@ -17,7 +17,7 @@
   font-size: 3rem !important;
   text-transform: uppercase !important;
   margin-bottom: 20px !important;
-  color: #000 !important; /* Black text */
+  color: #000 !important; 
   font-weight: 700 !important;
   letter-spacing: 2px !important;
   background: linear-gradient(90deg, #ff7e5f, #feb47b) !important;
@@ -30,7 +30,7 @@
   line-height: 1.8 !important;
   max-width: 900px !important;
   margin: 0 auto !important;
-  /* color: #333 !important; Dark gray text */
+  
 }
 
 .section-description {
@@ -38,9 +38,6 @@
   margin-bottom: 40px !important;
   color: #555 !important;
 }
-
-/* Home Section */
-/*  */
 
 
 .home {
@@ -50,7 +47,7 @@
   display: flex !important;
   justify-content: center !important;
   align-items: center !important;
-  width: 100% !important; /* Ensure the container stretches to full width */
+  width: 100% !important; 
 }
 
 .background-video {
@@ -59,10 +56,10 @@
   left: 0 !important;
   width: 100% !important;
   height: 100% !important;
-  object-fit: cover !important; /* Ensure the video covers the container */
-  z-index: -1 !important; /* Keep it behind the content */
-  pointer-events: none !important; /* Prevent the video from interfering with interactions */
-  min-height: 100vh !important; /* Ensures the video takes at least the full viewport height */
+  object-fit: cover !important;
+  z-index: -1 !important; 
+  pointer-events: none !important; 
+  min-height: 100vh !important; 
 }
 .about-container {
   display: flex !important;
@@ -78,7 +75,6 @@
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1) !important;
 }
 
-/* Equal height for both sides */
 .about-left, .about-right {
   flex: 1 !important;
   display: grid !important;
@@ -94,11 +90,11 @@
   border-radius: 12px !important;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1) !important;
   transition: all 0.3s ease !important;
-  /* text-align: center !important; */
+  
   display: flex !important;
   flex-direction: column !important;
   justify-content: center !important;
-  min-height: 120px !important; /* Ensuring equal height */
+  min-height: 120px !important;
 }
 
 .about-card:hover, .category-card:hover {
@@ -106,7 +102,6 @@
   box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15) !important;
 }
 
-/* Responsive Adjustments */
 @media (max-width: 1024px) {
   .about-container {
     flex-direction: column !important;
@@ -135,12 +130,11 @@ h3 {
 
 p {
   color: #444 !important;
-  /* font-size: 1rem !important; */
+  
   line-height: 1.6 !important;
 }
 
 
-/* EVENTS SECTION */
 .events-title {
   text-align: center !important;
   font-size: 2rem !important;
@@ -165,10 +159,10 @@ p {
 .event-grid1{
   display: flex;
   flex-wrap: wrap;
-  /* gap: 60px; */
+  
   
 }
-/* EVENT CARD */
+
 .event-card {
   background: #fff !important;
   border-radius: 12px !important;
