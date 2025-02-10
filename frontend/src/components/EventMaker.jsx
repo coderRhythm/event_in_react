@@ -18,7 +18,8 @@ const EventMaker = () => {
     event_website: "",
     additional_notes: "",
     organization_name: "",
-    target_audience: "", // New field for target audience
+    target_audience: "",
+    event_type: "free", // New field for event type (free or paid)
   });
 
   const [imageFile, setImageFile] = useState(null);
@@ -104,7 +105,8 @@ const EventMaker = () => {
         event_website: "",
         additional_notes: "",
         organization_name: "",
-        target_audience: "", 
+        target_audience: "",
+        event_type: "", // Reset event type as well
       });
   
       setImageFile(null); 
@@ -150,7 +152,7 @@ const EventMaker = () => {
               required
             />
             
-            {/* Target Audience Field (Select dropdown for Student/Faculty/Both) */}
+            {/* Target Audience Field */}
             <div className="target-audience">
               <h4>Target Audience:</h4>
               <select 
@@ -159,9 +161,25 @@ const EventMaker = () => {
                 onChange={handleChange} 
                 required
               >
+                <option value="">Select Audience</option>
                 <option value="Student">Student</option>
                 <option value="Faculty">Faculty</option>
                 <option value="both">Both</option>
+              </select>
+            </div>
+            
+            {/* Event Type Field */}
+            <div className="event-type">
+              <h4>Event Type:</h4>
+              <select 
+                name="event_type" 
+                value={formData.event_type} 
+                onChange={handleChange} 
+                required
+              >
+                <option value="">Select Event Type</option>
+                <option value="free">Free</option>
+                <option value="paid">Paid</option>
               </select>
             </div>
 
@@ -297,7 +315,9 @@ const EventMaker = () => {
               <p>{formData.event_category}</p>
               <h4>Target Audience:</h4>
               <p>{formData.target_audience}</p>
-              {/* Add other fields here for review */}
+              <h4>Event Type:</h4>
+              <p>{formData.event_type}</p>
+              {/* Additional fields can be reviewed here if needed */}
             </div>
             <button type="submit">Create Event</button>
             <button type="button" onClick={() => setStep(3)}>

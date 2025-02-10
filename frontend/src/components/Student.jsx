@@ -23,31 +23,44 @@ const Student = () => {
   const [filteredEvents, setFilteredEvents] = useState([]);
   const [showAll, setShowAll] = useState(false);
   
-  const fetchData = async () => {
-    try {
-      
-      // Fetch events
-      const eventsResponse = await fetch("http://localhost:5000/getEvents", {
-        credentials: "include",
+  const fetchData = () => {
+    // setLoading(true);
+  
+    // Fetch events
+    fetch("http://localhost:5000/getEvents", { credentials: "include" })
+      .then((eventsResponse) => {
+        // console.log("first event response:");
+        if (!eventsResponse.ok) {
+          throw new Error(`Error: ${eventsResponse.statusText}`);
+        }
+        return eventsResponse.json();
+      })
+      .then((eventsData) => {
+        console.log("events data: ", eventsData);
+        
+        setEvents(eventsData);
+        setFilteredEvents(filterEventsByAudience(eventsData));
+  
+        // Fetch student details
+        return fetch("http://localhost:5000/student/studentDetails", { credentials: "include" });
+      })
+      .then((studentResponse) => {
+        if (!studentResponse.ok) {
+          throw new Error(`Error: ${studentResponse.statusText}`);
+        }
+        return studentResponse.json();
+      })
+      .then((studentData) => {
+        setStudentDetails(studentData.user);
+      })
+      .catch((err) => {
+        setError(err.message);
+      })
+      .finally(() => {
+        setLoading(false);
       });
-      if (!eventsResponse.ok) throw new Error(`Error: ${eventsResponse.statusText}`);
-      const eventsData = await eventsResponse.json();
-      setEvents(eventsData);
-      setFilteredEvents(filterEventsByAudience(eventsData));
-      // Fetch student details
-      const studentResponse = await fetch("http://localhost:5000/student/studentDetails", {
-        credentials: "include",
-      });
-      if (!studentResponse.ok) throw new Error(`Error: ${studentResponse.statusText}`);
-      const studentData = await studentResponse.json();
-      setStudentDetails(studentData.user);
-
-    } catch (err) {
-      setError(err.message);
-    } finally {
-      setLoading(false); // Set loading to false once data is fetched
-    }
   };
+  
 
   useEffect(() => {
     fetchData();
@@ -56,7 +69,7 @@ const Student = () => {
     return events.filter((event) => event.target_audience === 'Student' || event.target_audience === 'both');
   };
   const eventsToDisplay = showAll ? events : events.slice(0, 4);
-  // Function to filter events based on target audience
+  
   
   
   const handleShowMore = () => {
@@ -189,22 +202,25 @@ const Student = () => {
       </p>
 
       {loading ? ( 
-        <Loader /> 
+        <div className="event-loader-container">
+          <Loader />
+      </div>
       ) : error ? ( 
         <p className="error-message">Error: {error}</p>
       ) : (
         <div className="event-grid">
           {filteredEvents.slice(0, showAll ? filteredEvents.length : 3).map((event) => (
             <div key={event.id} className="event-card">
+          
               {event.event_image && (
                 <img
                   src={`http://localhost:5000${event.event_image}`}
-                  alt={event.event_name}
+                  alt={event.event_title}
                   className="event-image"
                 />
               )}
               <div className="event-info">
-                <h3 className="event-name">{event.event_name}</h3>
+                <h3 className="event-name">{event.event_title}</h3>
                 <p className="event-date">
                   📅 <strong>Date:</strong> {event.event_date}
                 </p>

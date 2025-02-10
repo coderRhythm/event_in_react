@@ -1,7 +1,12 @@
 const { DataTypes } = require('sequelize');
 
 const eventRegisterSchema = (sequelize) => {
-  return sequelize.define('eventRegisterSchema', {  
+  return sequelize.define('eventRegisterSchema', {
+    id: {
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+      autoIncrement: true,
+  },  
     event_title: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -31,7 +36,7 @@ const eventRegisterSchema = (sequelize) => {
       allowNull: false,
     },
     event_image: {
-      type: DataTypes.BLOB,
+      type: DataTypes.STRING  ,
       allowNull: true,
     },
     organizer_name: {
@@ -62,10 +67,10 @@ const eventRegisterSchema = (sequelize) => {
       type: DataTypes.STRING, 
       allowNull: false,
     },
-    // New Field: Specifies the target audience (Student, Faculty, or Both)
     target_audience: {
       type: DataTypes.STRING,
       allowNull: false,
+      defaultValue:'Student',
       validate: {
         isIn: {
           args: [['Student', 'Faculty', 'both']], 
@@ -74,7 +79,6 @@ const eventRegisterSchema = (sequelize) => {
       },
     },
     
-    // Foreign Key for Event Manager
     event_manager_id: {
       type: DataTypes.INTEGER, 
       allowNull: false,
@@ -89,7 +93,6 @@ const eventRegisterSchema = (sequelize) => {
       allowNull: true,
     },
 
-    // New column: admin status (pending or assigned)
     status: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -98,6 +101,19 @@ const eventRegisterSchema = (sequelize) => {
         isIn: {
           args: [['pending', 'assigned']],
           msg: 'Status must be either "pending" or "assigned"',
+        },
+      },
+    },
+
+    // New Field: Event type (free or paid)
+    event_type: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      defaultValue:'free',
+      validate: {
+        isIn: {
+          args: [['free', 'paid']],
+          msg: 'Event type must be either "free" or "paid"',
         },
       },
     },

@@ -30,6 +30,8 @@ const [filteredEvents, setFilteredEvents] = useState([]);
       });
       if (!eventsResponse.ok) throw new Error(`Error: ${eventsResponse.statusText}`);
       const eventsData = await eventsResponse.json();
+      console.log(eventsData);
+      
       setEvents(eventsData);
 
       // Fetch faculty details
@@ -204,7 +206,7 @@ const [filteredEvents, setFilteredEvents] = useState([]);
                 />
               )}
               <div className="event-info">
-                <h3 className="event-name">{event.event_name}</h3>
+                <h3 className="event-name">{event.event_title}</h3>
                 <p className="event-date">
                   📅 <strong>Date:</strong> {event.event_date}
                 </p>

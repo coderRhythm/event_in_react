@@ -2,11 +2,11 @@ import React, { useState, useEffect } from 'react';
 import './Navbar.css';
 import { FaUser } from 'react-icons/fa';
 import Cookies from 'js-cookie';
-import mitLogo from '../assets/MIT_logo.png'; // Adjust the path to where you store your MIT logo
+import mitLogo from '../assets/MIT_logo.png'; 
 import { Navigate, useNavigate } from 'react-router-dom';
 
 const Navbar = () => {
-  // navigate
+  
   const navigate = useNavigate();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
@@ -72,7 +72,6 @@ const Navbar = () => {
           <li><a href="#contact" onClick={closeMenu}>Contact Us</a></li>
         </ul>
 
-        {/* Profile Icon and Dropdown */}
         <div className="profile-container" onClick={toggleProfileMenu}>
         <div className="profile-logo">
       {profileImage ? (
@@ -86,12 +85,12 @@ const Navbar = () => {
          }}
         />
       ) : (
-        // If there's no profile image, show the FaUser icon
+       
         <div className="profile-placeholder">
           <FaUser className="profile-img" />
           </div>
       )}
-    {/* </div> */}
+
           </div>
 
           {isProfileMenuOpen && (

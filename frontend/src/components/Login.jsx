@@ -42,7 +42,7 @@ const Login = ({ setIsForgotPasswordFlow }) => {
         },
         body: JSON.stringify(loginData),
         credentials: 'include'  
-         });
+      });
 
       const result = await response.json();
       console.log("result loginka: ", result);
