@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import "./Student.css";
 import Navbar from "./Navbar";
 import { useSpring, animated, config } from "@react-spring/web";
@@ -6,65 +6,80 @@ import { useInView } from "react-intersection-observer";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import { FaArrowRight, FaCalendar, FaUsers, FaSmile, FaFacebook, FaTwitter, FaInstagram, FaUser } from "react-icons/fa";
-import { motion } from "framer-motion";
-import mitLogo from '../assets/MIT_logo.png';
+import { FaArrowRight, FaCalendar, FaUsers, FaSmile, FaFacebook, FaTwitter, FaInstagram, FaUser ,FaBell} from "react-icons/fa";
 import avatar1 from '../assets/avatar1.avif';
 import avatar2 from '../assets/avatar2.avif';
 import avatar3 from '../assets/avatar3.avif';
 import Loader from "./Loader"; // Import the Loader component
-// FaUse
+import registerEvent from "./registerEvent";
+// useContext
+import { SocketContext } from "../App";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import Chatbot from "./Chatbot";
+// Chatbot
+
 const Student = () => {
+  const socket = useContext(SocketContext);
+  const api_url = 'http://localhost:5000';
+  const navigate = useNavigate();
   const [events, setEvents] = useState([]);
-  const [registeredEvents, setRegisteredEvents] = useState([]);
   const [studentDetails, setStudentDetails] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [filteredEvents, setFilteredEvents] = useState([]);
   const [showAll, setShowAll] = useState(false);
+  const [notifications, setNotifications] = useState([]);
+  const [notificationCount, setNotificationCount] = useState(0);
+  const [showNotifications, setShowNotifications] = useState(false);
+
+  const fetchData = async () => {
+    setLoading(true);
+    setError(null);
   
-  const fetchData = () => {
-    // setLoading(true);
-  
-    // Fetch events
-    fetch("http://localhost:5000/getEvents", { credentials: "include" })
-      .then((eventsResponse) => {
-        // console.log("first event response:");
-        if (!eventsResponse.ok) {
-          throw new Error(`Error: ${eventsResponse.statusText}`);
-        }
-        return eventsResponse.json();
-      })
-      .then((eventsData) => {
-        console.log("events data: ", eventsData);
-        
-        setEvents(eventsData);
-        setFilteredEvents(filterEventsByAudience(eventsData));
-  
-        // Fetch student details
-        return fetch("http://localhost:5000/student/studentDetails", { credentials: "include" });
-      })
-      .then((studentResponse) => {
-        if (!studentResponse.ok) {
-          throw new Error(`Error: ${studentResponse.statusText}`);
-        }
-        return studentResponse.json();
-      })
-      .then((studentData) => {
-        setStudentDetails(studentData.user);
-      })
-      .catch((err) => {
-        setError(err.message);
-      })
-      .finally(() => {
-        setLoading(false);
+    try {
+      // Fetch events
+      const eventsResponse = await axios.get(`${api_url}/getEvents`, {
+        withCredentials: true, 
       });
-  };
   
+      const eventsData = eventsResponse.data;
+      console.log("events data:", eventsData);
+  
+      setEvents(eventsData);
+      setFilteredEvents(filterEventsByAudience(eventsData));
+  
+      // Fetch student details
+      const studentResponse = await axios.get(`${api_url}/student/studentDetails`, {
+        withCredentials: true,
+      });
+  
+      setStudentDetails(studentResponse.data.user);
+    } catch (err) {
+      setError(err.response?.data?.message || err.message);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   useEffect(() => {
+    socket.on("new_event", (eventData) => {
+      // Check if the event is already in the notifications list
+      const isDuplicate = notifications.some((event) => event.id === eventData.id);
+      if (!isDuplicate) {
+        setNotifications((prev) => [...prev, eventData]);
+        setNotificationCount((prev) => prev + 1);
+      }
+    });
+
+    // Fetch data on component mount
     fetchData();
-  }, []);
+
+    // Clean up the WebSocket listener
+    return () => {
+      socket.off("new_event");
+    };
+  }, [socket, notifications]);
   const filterEventsByAudience = (events) => {
     return events.filter((event) => event.target_audience === 'Student' || event.target_audience === 'both');
   };
@@ -76,14 +91,6 @@ const Student = () => {
     setShowAll(true);
   };
 
-  // Scrollable Animations
-  const [homeRef, homeInView] = useInView({ triggerOnce: true });
-  const homeAnimation = useSpring({
-    opacity: homeInView ? 1 : 0,
-    transform: homeInView ? "translateY(0)" : "translateY(50px)",
-    config: config.wobbly,
-  });
-
   const [aboutRef, aboutInView] = useInView({ triggerOnce: true });
   const aboutAnimation = useSpring({
     opacity: aboutInView ? 1 : 0,
@@ -91,57 +98,41 @@ const Student = () => {
     config: config.gentle,
   });
 
-  const [eventsRef, eventsInView] = useInView({ triggerOnce: true });
-  const eventsAnimation = useSpring({
-    opacity: eventsInView ? 1 : 0,
-    transform: eventsInView ? "translateY(0)" : "translateY(50px)",
-    config: config.slow,
-  });
-
-  const [registeredRef, registeredInView] = useInView({ triggerOnce: true });
-  const registeredAnimation = useSpring({
-    opacity: registeredInView ? 1 : 0,
-    transform: registeredInView ? "translateY(0)" : "translateY(50px)",
-    config: config.molasses,
-  });
-
-  const [testimonialsRef, testimonialsInView] = useInView({ triggerOnce: true });
-  const testimonialsAnimation = useSpring({
-    opacity: testimonialsInView ? 1 : 0,
-    transform: testimonialsInView ? "translateY(0)" : "translateY(50px)",
-    config: config.stiff,
-  });
-
-  const [contactRef, contactInView] = useInView({ triggerOnce: true });
-  const contactAnimation = useSpring({
-    opacity: contactInView ? 1 : 0,
-    transform: contactInView ? "translateY(0)" : "translateY(50px)",
-    config: config.default,
-  });
-
-  // Carousel Settings
-  const carouselSettings = {
-    dots: true,
-    infinite: true,
-    speed: 500,
-    slidesToShow: 3,
-    slidesToScroll: 1,
-    autoplay: true,
-    autoplaySpeed: 3000,
-    responsive: [
-      {
-        breakpoint: 768,
-        settings: {
-          slidesToShow: 1,
-          slidesToScroll: 1,
-        },
-      },
-    ],
-  };
-
+  
+function handleRegister(evenId)
+{
+  navigate(`/student/register/${evenId}`);
+  
+}
   return (
     <div className="student-page">
       <Navbar />
+      <Chatbot/>
+      <div className="notification-icon-container">
+        <div className="notification-icon" onClick={() => setShowNotifications(!showNotifications)}>
+          <FaBell />
+          {notificationCount > 0 && (
+            <span className="notification-badge">{notificationCount}</span>
+          )}
+        </div>
+
+        {/* Notification Dropdown */}
+        {showNotifications && (
+          <div className="notification-dropdown">
+            <h3>Notifications</h3>
+            {notifications.length === 0 ? (
+              <p>No new notifications</p>
+            ) : (
+              notifications.map((notification) => (
+                <div key={notification.id} className="notification-item">
+                  <p><strong>{notification.event_title}</strong></p>
+                  <p>{notification.event_description}</p>
+                </div>
+              ))
+            )}
+          </div>
+        )}
+      </div>
 
       <section id="home" className="home">
         <video autoPlay muted loop className="background-video">
@@ -194,24 +185,23 @@ const Student = () => {
 
 
       {/* Events Section */}
-      <section id="events" className="section events">
+     <section id="events" className="section events">
       <h2 className="events-title">Upcoming Events</h2>
       <p className="section-description">
-        Explore a wide range of events tailored for students. From tech workshops to cultural fests, there's
-        something for everyone!
+        Explore a wide range of events tailored for students. From tech workshops to cultural fests, there's something for everyone!
       </p>
 
-      {loading ? ( 
+      {loading ? (
         <div className="event-loader-container">
           <Loader />
-      </div>
-      ) : error ? ( 
+        </div>
+      ) : error ? (
         <p className="error-message">Error: {error}</p>
       ) : (
         <div className="event-grid">
           {filteredEvents.slice(0, showAll ? filteredEvents.length : 3).map((event) => (
             <div key={event.id} className="event-card">
-          
+              {/* Event Image */}
               {event.event_image && (
                 <img
                   src={`http://localhost:5000${event.event_image}`}
@@ -219,24 +209,19 @@ const Student = () => {
                   className="event-image"
                 />
               )}
-              <div className="event-info">
-                <h3 className="event-name">{event.event_title}</h3>
-                <p className="event-date">
-                  📅 <strong>Date:</strong> {event.event_date}
-                </p>
-                <p className="event-description">
-                  <strong>Description:</strong>{" "}
-                  {event.event_description.length > 150
-                    ? `${event.event_description.slice(0, 100)}...`
-                    : event.event_description}
-                </p>
-                <button className="register-btn" onClick={() => handleRegister(event.id)}>Register</button>
-              </div>
+              
+              {/* Event Title */}
+              <h3 className="event-name">{event.event_title}</h3>
+
+              {/* Show More Button */}
+              <button onClick={() => navigate(`/event/student/${event.id}`)}>
+                Show More <FaArrowRight />
+              </button>
             </div>
           ))}
           <div className="showmoreSection">
             {!showAll && filteredEvents.length > 3 && (
-              <button className="show-more-btn" onClick={handleShowMore}>
+              <button className="show-more-btn" onClick={()=>navigate('/student/events')}>
                 <FaArrowRight /> {/* Arrow icon */}
               </button>
             )}
@@ -245,16 +230,7 @@ const Student = () => {
       )}
     </section>
 
-      {/* Registered Events Section */}
-    
-     {/* Testimonials Section */}
-
       
-
-      {/* New Section: Event Categories */}
-   
-     {/* New Section: Featured Speakers */}
-{/* New Section: Featured Speakers */}
 <section id="speakers" className="section speakers">
   <h2>Featured Speakers</h2>
   <p className="section-description">

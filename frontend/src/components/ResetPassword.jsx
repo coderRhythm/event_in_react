@@ -1,87 +1,87 @@
-import React, { useState } from 'react';
-import axios from 'axios';
-import { useNavigate } from 'react-router-dom';  // Import useNavigate hook
-import './ResetPassword.css';
+import React, { useState } from "react";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import "./ResetPassword.css";
 
 const ResetPassword = () => {
-  const [email, setEmail] = useState('');
-  const [newPassword, setNewPassword] = useState('');
-  const [message, setMessage] = useState('');
-  const [error, setError] = useState('');
+  const [email, setEmail] = useState("");
+  const [otp, setOtp] = useState("");
+  const [newPassword, setNewPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [step, setStep] = useState(1);
+  const [token, setToken] = useState("");
+  const [message, setMessage] = useState("");
+  const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-  const navigate = useNavigate();  
-  const handleResetPasswordSubmit = async (e) => {
-    e.preventDefault();
+  const navigate = useNavigate();
 
-    if (!email.trim() || !newPassword.trim()) {
-      setError('Please enter both email and new password.');
-      return;
-    }
-
+  const sendOtp = async () => {
     setIsLoading(true);
     try {
-      const response = await axios.post('http://localhost:5000/reset-password', {
-        email,
-        newPassword
-      });
-
-      if (response.status === 200) {
-        setMessage(response.data.message);
-        setError('');
-        setTimeout(() => {
-          navigate('/login');
-        }, 2000);
-      }
+      await axios.post("http://localhost:5000/send-otp", { email }, { withCredentials: true });
+      setStep(2);
+      setError("");
+      setMessage("OTP sent to your email.");
     } catch (error) {
-      setError('Error occurred. Please try again.');
-      setMessage('');
-    } finally {
-      setIsLoading(false);
+      setError("Error sending OTP.");
     }
+    setIsLoading(false);
   };
 
-  const handleBackClick = () => {
-    navigate('/login');
+  const verifyOtp = async () => {
+    setIsLoading(true);
+    try {
+      const response = await axios.post("http://localhost:5000/verify-otp", { email, otp }, { withCredentials: true });
+      setToken(response.data.token);
+      setStep(3);
+      setError("");
+      setMessage("OTP verified. Set your new password.");
+    } catch (error) {
+      setError("Invalid OTP.");
+    }
+    setIsLoading(false);
+  };
+
+  const resetPassword = async () => {
+    setIsLoading(true);
+    try {
+      await axios.post("http://localhost:5000/reset-password", { token, newPassword, confirmPassword }, { withCredentials: true });
+      setMessage("Password reset successful! Redirecting to login...");
+      setTimeout(() => navigate("/login"), 2000);
+    } catch (error) {
+      setError("Error resetting password.");
+    }
+    setIsLoading(false);
   };
 
   return (
     <div className="reset-password-container">
       <h2>Reset Password</h2>
 
-      <form onSubmit={handleResetPasswordSubmit}>
-        <div className="form-group">
-          <input
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-            placeholder="Enter your email"
-            className="input-field"
-          />
-        </div>
-        <div className="form-group">
-          <input
-            type="password"
-            value={newPassword}
-            onChange={(e) => setNewPassword(e.target.value)}
-            required
-            placeholder="Enter your new password"
-            className="input-field"
-          />
-        </div>
+      {step === 1 && (
+        <>
+          <input type="email" placeholder="Enter your email" value={email} onChange={(e) => setEmail(e.target.value)} />
+          <button onClick={sendOtp} disabled={isLoading}>{isLoading ? "Sending OTP..." : "Send OTP"}</button>
+        </>
+      )}
 
-        <button type="submit" className="submit-btn">
-          {isLoading ? 'Updating...' : 'Update Password'}
-        </button>
-      </form>
+      {step === 2 && (
+        <>
+          <input type="text" placeholder="Enter OTP" value={otp} onChange={(e) => setOtp(e.target.value)} />
+          <button onClick={verifyOtp} disabled={isLoading}>{isLoading ? "Verifying OTP..." : "Verify OTP"}</button>
+        </>
+      )}
+
+      {step === 3 && (
+        <>
+          <input type="password" placeholder="New Password" value={newPassword} onChange={(e) => setNewPassword(e.target.value)} />
+          <input type="password" placeholder="Confirm Password" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} />
+          <button onClick={resetPassword} disabled={isLoading}>{isLoading ? "Updating..." : "Update Password"}</button>
+        </>
+      )}
 
       {message && <p className="success-message">{message}</p>}
       {error && <p className="error-message">{error}</p>}
-
-      {/* Back Button */}
-      <button onClick={handleBackClick} className="back-btn">
-        Back to Forgot Password
-      </button>
     </div>
   );
 };

@@ -1,0 +1,390 @@
+
+.admin-dashboard {
+  display: flex;
+  min-height: 100vh;
+}
+
+.sidebar {
+  width: 250px;
+  background: #ffffff; 
+  color: black; 
+  padding: 20px;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+  position: fixed;
+  height: 100%;
+  z-index: 1000;
+  border-right: 1px solid #ddd; 
+}
+
+.sidebar.closed {
+  transform: translateX(-250px);
+}
+
+.sidebar.open {
+  transform: translateX(0);
+}
+
+.sidebar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.sidebar-toggle {
+  background: none;
+  border: none;
+  color: black; 
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.sidebar ul {
+  list-style: none;
+  padding: 0;
+}
+
+.sidebar ul li {
+  padding: 10px;
+  margin: 10px 0;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background 0.3s;
+}
+
+.sidebar ul li:hover {
+  background: #0a0a0a; 
+  color: rgb(231, 228, 228); 
+}
+
+.main-content {
+  flex: 1;
+  padding: 20px;
+  background: white; 
+  margin-left: 0;
+  transition: margin-left 0.3s ease;
+}
+.main-content h1{
+  text-align: center;
+}
+.sidebar.open + .main-content {
+  margin-left: 250px;
+}
+
+.main-content h1 {
+  font-size: 24px;
+  margin-bottom: 20px;
+  color: black; 
+}
+
+.hamburger-btn {
+  background: none;
+  border: none;
+  /* position: fixed; */
+  font-size: 24px;
+  cursor: pointer;
+  margin-bottom: 20px;
+  display: block;
+  text-align: left;
+  width: auto;
+  color: black; 
+}
+
+.filter-buttons {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+  justify-content: center ;
+  align-items: center;
+}
+
+.btn {
+  padding: 10px 15px;
+  width: 200px;
+  
+  border: 1px solid #ddd;
+  cursor: pointer;
+  font-size: 14px;
+  border-radius: 4px;
+  color: black; 
+  background: white; 
+  transition: background 0.3s;
+}
+.btn.selected {
+  background-color: black;
+  color: white;
+}
+.btn:hover {
+  background: #0a0a0a;
+  color: rgb(231, 228, 228); 
+}
+
+.table-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  /* margin:0 auto; */
+  max-height: 300px;
+  height: 500px;
+  overflow-y: auto;
+  /* ; */
+  /* margin-top: 60px; */
+  /* height: 80%; */
+}
+
+/* Table styling */
+.event-table {
+  width: 50%; /* Adjust width as needed */
+  border-collapse: collapse;
+  background: white;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+}
+
+.event-table th,
+.event-table td {
+  padding: 12px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+.event-table th {
+  background: #f8f8f8;
+  color: black;
+}
+
+.status {
+  font-weight: bold;
+  text-transform: capitalize;
+}
+
+.status.approved,
+.status.pending {
+  color: black;
+}
+
+/* Modal styles */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 999;
+}
+
+.edit-modal, .assign-modal  {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: white; /* White background */
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+  width: 90%; /* Adjust width for small screens */
+  max-width: 400px; /* Limit maximum width */
+  z-index: 1000;
+  text-align: center;
+}
+
+.edit-modal h2, .assign-modal h2 {
+  margin-bottom: 10px;
+  color: black; /* Black text */
+}
+
+.date-input {
+  width: 90%;
+  padding: 8px;
+  margin-bottom: 10px;
+  border: 1px solid #ddd; /* Light gray border */
+  border-radius: 4px;
+}
+
+/* Modal Buttons */
+.modal-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.save-btn, .cancel-btn {
+  padding: 8px 15px;
+  background-color: white; /* White background */
+  color: black; /* Black text */
+  border: 1px solid #ddd; /* Light gray border */
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background 0.3s;
+}
+
+.save-btn:hover, .cancel-btn:hover, .assign-modal ul li button:hover {
+  background: #0a0a0a; /* Dark hover */
+  color: rgb(231, 228, 228); /* Light text on hover */
+}
+.pagination {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  align-items: center;
+  
+  /* margin-top: 20px; */
+}
+.pagBtns{
+  display: flex;
+  gap: 30px;
+}
+.pageBtns button{
+  width: 100px;
+}
+.pagNumberBtns{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+}
+.pagNumberBtns button{
+  width: 100px;
+}
+.pageBtns{
+  display: flex;
+  gap: 30px;
+}
+
+ul li{
+  list-style-type: none;
+}
+.assign-modal ul li button.selected {
+  background-color: #3498db; /* Primary color */
+  color: #fff;
+  border-color: #3498db;
+}
+
+.pageBtns button{
+  width: 100px;
+}
+.pagination .pagBtns button {
+  padding: 12px !important;
+  /* margin: 0 4px; */
+  width: 100px;
+  border: 1px solid #ccc;
+  background-color: white;
+  color: black;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.pagination button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.pagination button.active {
+  background-color: #007bff; /* Or your primary color */
+  color: rgb(11, 11, 11);
+  border-color: #007bff;
+}
+
+.pagination-ellipsis {
+    margin: 0 8px;
+    font-size: 1.2em;
+    color: #777;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+  .event-table {
+      max-width: 100%; /* Full width on small screens */
+      overflow-x: auto !important;
+      font-size: 12px; /* Adjust font size */
+      
+  }
+  .event-table th,
+.event-table td {
+  font-size: 10px;
+  font-weight: bolder;
+  text-align: left;
+  border-bottom: 1px solid #ddd; /* Light gray border */
+}
+  .btn{
+    width: 100px;
+    
+  }
+  .pagination{
+    flex-direction: column;
+  }
+  .sidebar {
+      transform: translateX(-250px); /* Hide sidebar by default on small screens */
+  }
+  .dropdown-btn{
+    font-size: small;
+  }
+  .sidebar.open {
+      transform: translateX(0); /* Show sidebar when open */
+  }
+
+  .hamburger-btn {
+      display: block; /* Show hamburger button on small screens */
+  }
+
+  .filter-buttons {
+    justify-content: flex-start;
+       /* Stack filter buttons vertically */
+  }
+
+  .edit-modal, .assign-modal {
+      width: 90%; /* Full width on small screens */
+      padding: 15px;
+  }
+
+  .cancel-btn {
+      background-color: #f44336; /* Red background for cancel button */
+  }
+
+  .cancel-btn:hover {
+      background-color: #d32f2f; /* Darker red on hover */
+  }
+}
+
+/* Dropdown styles */
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-btn {
+  background-color: #4CAF50;
+  color: white;
+  padding: 8px 16px;
+  border: none;
+  cursor: pointer;
+}
+
+.dropdown-content {
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 120px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown-content button {
+  color: black;
+  padding: 8px 16px;
+  text-decoration: none;
+  display: block;
+  width: 100%;
+  text-align: left;
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+
+.dropdown-content button:hover {
+  background-color: #f1f1f1; /* Light gray on hover */
+}
+

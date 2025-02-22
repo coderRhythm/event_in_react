@@ -1,17 +1,17 @@
 import React, { useState, useRef, useEffect } from 'react';
 import './Login.css';
 import { useNavigate } from 'react-router-dom';
-import mitLogo from '../assets/MIT_logo.png'; 
-import LoadingSpinner from './LoadingSpinner'; 
+import mitLogo from '../assets/MIT_logo.png';
+import LoadingSpinner from './LoadingSpinner';
 
 const Login = ({ setIsForgotPasswordFlow }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const [isFocused, setIsFocused] = useState({ email: false, password: false });
 
   const navigate = useNavigate();
-  
   const emailInputRef = useRef(null);
 
   useEffect(() => {
@@ -19,7 +19,7 @@ const Login = ({ setIsForgotPasswordFlow }) => {
   }, []);
 
   const handleGoogleLogin = () => {
-    setIsLoading(true); 
+    setIsLoading(true);
     window.location.href = 'http://localhost:5000/auth/google';
   };
 
@@ -31,26 +31,31 @@ const Login = ({ setIsForgotPasswordFlow }) => {
     }
 
     const loginData = { email, password };
-    
-    try {
-      setIsLoading(true); 
 
+    try {
+      setIsLoading(true);
+      console.log(loginData);
+      
       const response = await fetch('http://localhost:5000/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(loginData),
-        credentials: 'include'  
+        credentials: 'include',
       });
 
       const result = await response.json();
-      console.log("result loginka: ", result);
+      console.log('result loginka: ', result);
 
       setIsLoading(false);
 
       if (response.ok) {
         const role = result.user.role;
+        if(role=='admin')
+        {
+          navigate('/admin');
+        }
         if (role === 'student') {
           navigate('/student');
         } else if (role === 'faculty') {
@@ -64,12 +69,12 @@ const Login = ({ setIsForgotPasswordFlow }) => {
     } catch (error) {
       console.log(error);
       setError('Error during login. Please try again.');
-      setIsLoading(false); 
+      setIsLoading(false);
     }
   };
 
   const handleForgotPassword = () => {
-    setIsForgotPasswordFlow(true); 
+    setIsForgotPasswordFlow(true);
     navigate('/forgot-password');
   };
 
@@ -81,56 +86,79 @@ const Login = ({ setIsForgotPasswordFlow }) => {
     <div className="login-container">
       {isLoading && <LoadingSpinner />}
 
-      <img src={mitLogo} alt="MIT Logo" className="mit-logo" /> 
-      <h2 className="login-title">Login</h2>
+      <div className="login-card">
+        <img src={mitLogo} alt="MIT Logo" className="mit-logo" />
+        <h2 className="login-title">Welcome Back</h2>
+        <p className="login-subtitle">Sign in to your account</p>
 
-      <form onSubmit={handleManualLogin} className="login-form">
-        <div className="form-group">
-          <input
-            type="email"
-            id="email"
-            ref={emailInputRef} 
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-            placeholder='Email:'
-            className="input-field"
-          />
-        </div>
-
-        <div className="form-group">
-          <input
-            type="password"
-            id="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-            placeholder='Password:'
-            className="input-field"
-          />
-        </div>
-        <div className='content'>
-          <div className="forgot-password">
-            <a href="/forgot-password" >Forgot Password?</a>
-            <button type="submit" className="login-btn">
-              Login
-            </button>
+        <form onSubmit={handleManualLogin} className="login-form">
+          <div className="form-group">
+            <input
+              type="email"
+              id="email"
+              ref={emailInputRef}
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              onFocus={() => setIsFocused({ ...isFocused, email: true })}
+              onBlur={() => setIsFocused({ ...isFocused, email: false })}
+              required
+              className="input-field"
+            />
+            <label
+              htmlFor="email"
+              className={`input-label ${isFocused.email || email ? 'active' : ''}`}
+            >
+              Email
+            </label>
           </div>
-          <p className="or-text">OR</p>
-          <div className='otherBtns'>
-          <button type="button" onClick={handleGoogleLogin} className="google-login-btn">
-  <i className="fab fa-google"></i> Login with Google
-</button>
 
-
-            <button className="google-login-btn" onClick={goSignup}>
-              Signup
-            </button>
+          <div className="form-group">
+            <input
+              type="password"
+              id="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              onFocus={() => setIsFocused({ ...isFocused, password: true })}
+              onBlur={() => setIsFocused({ ...isFocused, password: false })}
+              required
+              className="input-field"
+            />
+            <label
+              htmlFor="password"
+              className={`input-label ${isFocused.password || password ? 'active' : ''}`}
+            >
+              Password
+            </label>
           </div>
-        </div>
-      </form>
 
-      {error && <p className="error-text">{error}</p>}
+          {error && <p className="error-text">{error}</p>}
+
+          <button type="submit" className="login-btn">
+            Sign In
+          </button>
+        </form>
+
+        <div className="divider">
+          <span>OR</span>
+        </div>
+
+        <button type="button" onClick={handleGoogleLogin} className="google-login-btn">
+          <i className="fab fa-google"></i> Continue with Google
+        </button>
+
+        <p className="forgot-password-link">
+          <a href="/forgot-password" onClick={handleForgotPassword}>
+            Forgot your password?
+          </a>
+        </p>
+
+        <p className="signup-link">
+          Don't have an account?{' '}
+          <a href="/signup" onClick={goSignup}>
+            Sign up
+          </a>
+        </p>
+      </div>
     </div>
   );
 };

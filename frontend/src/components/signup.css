@@ -1,23 +1,24 @@
+/* General Styles */
 .signup-container {
   max-width: 500px;
   margin: 20vh auto;
   padding: 2rem;
-  border: 1px solid #ddd;
-  border-radius: 10px;
+  border: 1px solid #e5e7eb; /* Match login form border color */
+  border-radius: 12px; /* Match login form border radius */
   background: #fff;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Match login form shadow */
   transform: translateY(0);
   animation: slideDown 0.5s ease-out;
 }
 
 @keyframes slideDown {
   from {
-      opacity: 0;
-      transform: translateY(-20px);
+    opacity: 0;
+    transform: translateY(-20px);
   }
   to {
-      opacity: 1;
-      transform: translateY(0);
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 
@@ -25,33 +26,45 @@
   text-align: center;
   margin-bottom: 1rem;
   font-size: 2rem;
-  color: #333;
+  color: black; /* Match login form title color */
 }
 
 .signup-container h3 {
   text-align: center;
   margin-bottom: 1rem;
   font-size: 1.5rem;
-  color: #555;
+  color: #6b7280; /* Match login form subtitle color */
+}
+
+/* Form Styles */
+.signup-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px; /* Match login form gap */
+}
+
+.form-group {
+  position: relative;
+  width: 100%;
 }
 
 input,
 select {
   width: 100%;
-  max-width: 100%;
   padding: 12px;
-  margin: 10px 0;
-  border: 1px solid #ccc;
-  border-radius: 5px;
+  border: 1px solid #e5e7eb; /* Match login form input border */
+  border-radius: 8px; /* Match login form input border radius */
   font-size: 1rem;
-  transition: all 0.3s ease;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  color: black; /* Match login form input text color */
+  background-color: white; /* Match login form input background */
 }
 
 input:focus,
 select:focus {
   outline: none;
-  border-color: #007bff;
-  box-shadow: 0 0 8px rgba(0, 123, 255, 0.5);
+  border-color: black; /* Match login form input focus border color */
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.1); /* Match login form input focus shadow */
 }
 
 button {
@@ -60,33 +73,31 @@ button {
   margin-top: 10px;
   font-size: 1rem;
   border: none;
-  border-radius: 5px;
+  border-radius: 8px; /* Match login form button border radius */
   cursor: pointer;
-  transition: transform 0.2s;
+  transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
 button:hover {
-  transform: scale(1.03);
+  transform: translateY(-2px); /* Match login form button hover effect */
 }
 
 .btn-primary {
-  background-color: #007bff;
-  color: white;
-  transition: background-color 0.3s;
+  background-color: black; /* Match login form button background */
+  color: white; /* Match login form button text color */
 }
 
 .btn-primary:hover {
-  background-color: #0056b3;
+  background-color: #333; /* Match login form button hover background */
 }
 
 .btn-secondary {
-  background-color: #6c757d;
-  color: white;
-  transition: background-color 0.3s;
+  background-color: #6c757d; /* Match login form secondary button background */
+  color: white; /* Match login form secondary button text color */
 }
 
 .btn-secondary:hover {
-  background-color: #565e64;
+  background-color: #565e64; /* Match login form secondary button hover background */
 }
 
 .form-buttons {
@@ -95,49 +106,51 @@ button:hover {
   gap: 10px;
 }
 
+/* Responsive Adjustments */
 @media (max-width: 768px) {
   .signup-container {
-      padding: 1.5rem;
-      box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+    max-width: 90%; /* Adjust width for smaller screens */
+    padding: 1.5rem;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
   }
 
-  h2 {
-      font-size: 1.8rem;
+  .signup-container h2 {
+    font-size: 1.8rem; /* Adjust font size for smaller screens */
   }
 
-  h3 {
-      font-size: 1.3rem;
+  .signup-container h3 {
+    font-size: 1.3rem; /* Adjust font size for smaller screens */
   }
 
   button {
-      font-size: 0.9rem;
-      padding: 10px;
+    font-size: 0.9rem; /* Adjust font size for smaller screens */
+    padding: 10px; /* Adjust padding for smaller screens */
   }
 
   input,
   select {
-      font-size: 0.9rem;
-      padding: 10px;
+    font-size: 0.9rem; /* Adjust font size for smaller screens */
+    padding: 10px; /* Adjust padding for smaller screens */
   }
 }
 
 @media (max-width: 480px) {
   .signup-container {
-      margin: 2vh auto;
-      padding: 1rem;
+    margin: 2vh auto;
+    padding: 1rem;
   }
 
-  h2 {
-      font-size: 1.5rem;
+  .signup-container h2 {
+    font-size: 1.5rem; /* Adjust font size for very small screens */
   }
 
-  h3 {
-      font-size: 1.2rem;
+  .signup-container h3 {
+    font-size: 1.2rem; /* Adjust font size for very small screens */
   }
 
   input,
   select {
-      font-size: 0.85rem;
-      padding: 8px;
+    font-size: 0.85rem; /* Adjust font size for very small screens */
+    padding: 8px; /* Adjust padding for very small screens */
   }
 }

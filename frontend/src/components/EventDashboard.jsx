@@ -32,10 +32,7 @@ const EventDashboard = () => {
 
     fetchDashboardData();
   }, []);
-
-  const handleGoToEventDetail = (eventId) => {
-    navigate(`/event/detail/${eventId}`);
-  };
+  
 
   if (loading) {
     return <div className="loading">Loading events...</div>;
@@ -64,7 +61,7 @@ const EventDashboard = () => {
               <p className="event-participants">
                 {event.expected_participants} participants expected
               </p>
-              <button className="view-details-button">View Details</button>
+              {/* <button className="view-details-button" onClick={handleGoToEventDetail(event.id)}>View Details</button> */}
             </div>
           ))
         ) : (
