@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 const express = require('express');
 const app = express();
 const passport = require('passport');
@@ -17,7 +19,7 @@ const uploadDir = "uploads";
 app.use(express.json());
 app.use(cookieParser());
 app.use(session({secret: 'your_secret_key',resave: true,saveUninitialized: false,cookie: {    secure: false,    maxAge: 24 * 60 * 60 * 1000}}));
-app.use(cors({  origin: ["http://localhost:5173", "https://lprz178q-5173.inc1.devtunnels.ms/"],  credentials: true, }));
+app.use(cors({  origin: ["http://localhost:5173"],  credentials: true, }));
 app.use("/uploads", express.static("uploads"));
 app.use(passport.initialize());
 app.use(passport.session());
@@ -31,19 +33,25 @@ const io = new Server(server, {
         credentials: true,
     },
 });
-  io.on("connection", (socket) => {
+const events = [];
+io.on("connection", (socket) => {
     console.log(`Client connected: ${socket.id}`);
-  
+
+    socket.on("get_missed_events", (lastEventId) => {
+        const missedEvents = events.filter(event => event.id > lastEventId);
+        socket.emit("missed_events", missedEvents);
+    });
+
     socket.on("error", (err) => {
-      console.error("Socket error:", err);
+        console.error("Socket error:", err);
     });
-    
+
     socket.on("disconnect", () => {
-      console.log("Client disconnected");
+        console.log("Client disconnected");
     });
-  });
-  
+});
   const broadcastEventCreation = (eventData) => {
+    events.push(eventData);
     io.emit("new_event", eventData); 
   };
 if (!fs.existsSync(uploadDir)) {fs.mkdirSync(uploadDir);}
@@ -70,8 +78,8 @@ const fileFilter = (req, file, cb) => {
 const transporter = nodemailer.createTransport({
     service: "gmail",
     auth: {
-        user: "sethiyarhythm494@gmail.com",  
-        pass: "jqek xdtz uyvz xmlc"  
+        user: process.env.GMAIL_MAIL,  
+        pass: process.env.GMAIL_PASS
     }
 });
 let otpStore = {};  
@@ -86,20 +94,48 @@ app.post("/send-otp", async (req, res) => {
     otpStore[email] = { otp, expiresAt: Date.now() + 5 * 60 * 1000 };
 
     const mailOptions = {
-        from: "sethiyarhythm494@gmail.com",
+        from: process.env.GMAIL_MAIL,
         to: email,
         subject: "Password Reset OTP",
         text: `Your OTP for resetting your password is: ${otp}`
     };
 
     try {
+        console.log("mail is ready to sent");
+        
         await transporter.sendMail(mailOptions);
         res.json({ message: "OTP sent to email" });
+        console.log("mail is send");
+        
     } catch (error) {
         res.status(500).json({ message: "Error sending email", error });
     }
 });
-
+app.post("/sendSignup-otp", async (req, res) => {
+    const { email } = req.body;
+  
+    if (!email || !email.includes("@")) {
+      return res.status(400).json({ message: "Invalid email address." });
+    }
+  
+    const otp = Math.floor(100000 + Math.random() * 900000); // 6-digit OTP
+    otpStore[email] = { otp, expiresAt: Date.now() + 5 * 60 * 1000 }; // OTP valid for 5 minutes
+  
+    const mailOptions = {
+      from: "sethiyarhythm494@gmail.com",
+      to: email,
+      subject: "Signup OTP",
+      text: `Your OTP for signup is: ${otp}`,
+    };
+  
+    try {
+      await transporter.sendMail(mailOptions);
+      res.json({ message: "OTP sent to email." });
+    } catch (error) {
+      console.error("Error sending email:", error);
+      res.status(500).json({ message: "Error sending OTP." });
+    }
+  });
 const jwt = require("jsonwebtoken");
 
 app.post("/verify-otp", (req, res) => {
@@ -170,8 +206,8 @@ const upload = multer({
     limits: { fileSize: 5 * 1024 * 1024 },
 });
 passport.use(new GoogleStrategy({
-    clientID: '683137550793-qo3354aq3mg1dr6k9nvn747vip5vlb98.apps.googleusercontent.com',
-    clientSecret: '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',
+    clientID: process.env.GOOGLE_CLIENTID,
+    clientSecret: process.env.GOOGLE_CLIENTSECRET,
     callbackURL: 'http://localhost:5000/auth/google/callback',
 }, async (accessToken, refreshToken, profile, done) => {
     console.log("profile: ", profile);
@@ -290,7 +326,7 @@ app.post('/logout', async (req, res) => {
 });
 app.post('/registerEvent', async (req, res) => {
     try {
-        const { student_id, eventId, phone_number, role } = req.body; // Added role field
+        const { student_id, eventId, phone_number, role } = req.body; 
 
         if (!student_id || !eventId || !phone_number) {
             return res.status(400).json({ message: 'Student ID, Event ID, and Phone number are required' });
@@ -317,7 +353,7 @@ app.post('/registerEvent', async (req, res) => {
             user_id: student_id,
             event_id: eventId,
             phone_number,
-            role: role || null, // Store role if provided, otherwise set to null
+            role: role || null, 
         });
 
         return res.status(201).json({
@@ -453,7 +489,7 @@ app.post('/login', async (req, res) => {
             return res.status(400).json({ error: 'Password cannot be empty' });
         }
 
-        if (email == "admin@gmail.com" && password == "admin123") {
+        if (email == process.env.GMAIL_ADMIN && password == process.env.GMAIL_ADMINPASS ) {
             console.log("admin login");
             
             res.cookie("userId", -1, {
@@ -543,7 +579,6 @@ app.get('/api/registered-events/:userId', async (req, res) => {
     console.log("Fetching registered events for userId:", userId);
 
     try {
-        // Step 1: Fetch all registered entries for the user
         const registeredEntries = await models.Register.findAll({
             where: { user_id: userId }
         });
@@ -557,15 +592,12 @@ app.get('/api/registered-events/:userId', async (req, res) => {
             });
         }
 
-        // Step 2: Extract all event IDs from the registered entries
         const eventIds = registeredEntries.map(entry => entry.event_id);
 
-        // Step 3: Fetch event details for those event IDs
         const eventDetails = await models.Event.findAll({
             where: { id: eventIds }
         });
 
-        // Step 4: Return the count, registered events, and event details
         res.json({
             count: registeredEntries.length,
             registeredEvents: registeredEntries,
@@ -608,7 +640,6 @@ app.get('/getPaginatedEvents', async (req, res) => {
             where: { status: 'approved' }
             });
         
-            // finding total events of status ='pending';
             const totalPendingEvents = await models.Event.count({
                 where: { status: 'pending' }
                 });
@@ -661,14 +692,14 @@ app.get("/event/dashboard", async (req, res) => {
 
 const { GoogleGenerativeAI } = require("@google/generative-ai");
 
-const genAI = new GoogleGenerativeAI('AIzaSyC8ALqlde95XjOqEM9kS2gfOYwS7tURdxM');
+const genAI = new GoogleGenerativeAI(process.env.CONFIG);
 
 app.post("/chatbot", async (req, res) => {
     try {
       const { message, event } = req.body;
-  
-      const model = genAI.getGenerativeModel({ model: "gemini-pro" });
-  
+        
+   
+        const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash" });
       let prompt;
   
       if (event) {
@@ -763,7 +794,7 @@ app.post("/createEvent", upload.single("event_image"), async (req, res) => {
         });
         broadcastEventCreation(newEvent);
         const mailOptions = {
-            from: '"Event Manager Notification" <youradminemail@gmail.com>',
+            from: '"Event Manager Notification" ',
             to: "1032212447@mitwpu.edu.in",
             subject: `New Event Created: ${event_title}`,
             html: `
@@ -830,7 +861,14 @@ app.post('/addUser', async (req, res) => {
                 experience
             });
         }
-
+        
+        const mailOptions = {
+            from: 'sethiyarhythm494@gmail.com',
+            to: email,
+            subject: 'Welcome to the eventHub',
+            text: `Hello, ${name}! You have been successfully registered as a ${role}`
+        }
+        await transporter.sendMail(mailOptions)
         res.status(201).json({ message: 'User created successfully', user });
     } catch (error) {
         console.error(error);
