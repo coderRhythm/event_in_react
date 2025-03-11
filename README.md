@@ -45,25 +45,9 @@ Excited to share **Realtime EventHub** – a real-time college event management 
 
 ---
 
-## 📹 See It in Action:
-I’ve put together a short **demo video** showcasing Realtime EventHub’s capabilities.  
 
-### 🔗 Watch the Video:
-<video width="600" controls>
-  <source src="C:\Users\sethi\Downloads\video_eventhub.mp4" type="video/mp4">
-  Your browser does not support the video tag.
-</video>
 
-*(Ensure to replace `your-video.mp4` with the correct path to your uploaded video file.)*
 
----
-
-## 🔗 Explore the Code:
-👉 [GitHub Repository](https://lnkd.in/dDHUUg_v)
-
-I’m looking forward to hosting it soon! Your feedback and suggestions are always welcome. 😊
-
----
 
 ## 🔖 Hashtags
 
