@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import Cookies from 'js-cookie';
-import './Dashboard.css'; // Import the stylesheet
+import './Dashboard.css'; 
 
 const Dashboard = () => {
   const [eventDetails, setEventDetails] = useState([]);
@@ -39,14 +39,14 @@ const Dashboard = () => {
         <div className="dashboard-event-list">
           {eventDetails.map((event, index) => (
             <div key={index} className="dashboard-event-card">
-              {/* Event Image */}
+             
               {event.event_image && (
                 <img
                   src={`http://localhost:5000${event.event_image}`}
                   alt={event.event_title}
                   className="dashboard-event-image"
                   onError={(e) => {
-                    e.target.src = 'https://via.placeholder.com/320x180'; // Fallback image
+                    e.target.src = 'https://via.placeholder.com/320x180'; 
                   }}
                 />
               )}
@@ -61,7 +61,6 @@ const Dashboard = () => {
                 <p className="dashboard-event-venue">
                   <strong>Venue:</strong> {event.event_venue}
                 </p>
-                {/* <p className="dashboard-event-description">{event.event_description}</p> */}
               </div>
             </div>
           ))}
