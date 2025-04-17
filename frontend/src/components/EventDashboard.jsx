@@ -61,7 +61,6 @@ const EventDashboard = () => {
               <p className="event-participants">
                 {event.expected_participants} participants expected
               </p>
-              {/* <button className="view-details-button" onClick={handleGoToEventDetail(event.id)}>View Details</button> */}
             </div>
           ))
         ) : (
