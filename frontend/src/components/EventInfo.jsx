@@ -42,7 +42,7 @@ const EventInfo = () => {
             id: data.user.id, 
             name: data.user.name, 
             email: data.user.email, 
-            role: data.user.role // Get category (student/faculty)
+            role: data.user.role 
           });
           setIsConfirmModalOpen(true);
         } else {
@@ -61,7 +61,7 @@ const EventInfo = () => {
     const registrationData = {
       eventId: eventId,
       student_id: student.id,
-      phone_number: phone,  // Ensure phone_number is always included
+      phone_number: phone, 
     };
   
     if (student.role === "faculty") {
@@ -132,15 +132,12 @@ const EventInfo = () => {
         onChange={(e) => setPhone(e.target.value)} 
         required 
       />
-      {/* O nly show the phone input if the user is a student */}
       {student.role === "student" && (
         <>
           <label>Phone:</label>
           <input type="text" value={phone} onChange={(e) => setPhone(e.target.value)} required />
         </>
       )}
-
-      {/* If faculty, show role selection */}
       {student.role === "faculty" && (
         <>
           <label>How would you like to contribute?</label>
