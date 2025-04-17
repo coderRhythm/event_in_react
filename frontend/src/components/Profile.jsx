@@ -29,7 +29,6 @@ const Profile = () => {
       <h2>Profile</h2>
       <p>Name: {user.name}</p>
       <p>Email: {user.email}</p>
-      {/* Add other profile details here */}
     </div>
   );
 };
