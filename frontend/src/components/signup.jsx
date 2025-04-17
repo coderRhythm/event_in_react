@@ -3,7 +3,7 @@ import axios from "axios";
 import "./Signup.css";
 
 const Signup = () => {
-  const [step, setStep] = useState(1); // Tracks the current step
+  const [step, setStep] = useState(1);
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -24,7 +24,6 @@ const Signup = () => {
         },
       }));
     } else {
-      // Update main fields
       setFormData({
         ...formData,
         [name]: value,
@@ -34,14 +33,14 @@ const Signup = () => {
 
   const handleNext = () => {
     if (formData.role) {
-      setStep(2); // Move to the next step
+      setStep(2); 
     } else {
       alert("Please select a role before proceeding!");
     }
   };
 
   const handleBack = () => {
-    setStep(1); // Go back to the previous step
+    setStep(1); 
   };
 
   const handleSubmit = async (e) => {
@@ -100,7 +99,6 @@ const Signup = () => {
             required
           />
 
-          {/* Additional Info based on Role */}
           {formData.role === "student" && (
             <div>
               <input
