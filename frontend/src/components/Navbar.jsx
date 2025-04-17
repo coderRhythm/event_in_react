@@ -59,7 +59,6 @@ const Navbar = () => {
   return (
     <nav className={`navbar ${isScrolled ? 'scrolled' : ''}`}>
       <div className="navbar-container">
-        {/* Toggle button for mobile */}
         <div className="navbar-toggle" onClick={toggleMenu}>
           <span className={`hamburger ${isMenuOpen ? 'open' : ''}`}></span>
         </div>
@@ -68,9 +67,7 @@ const Navbar = () => {
           <img src={mitLogo} alt="MIT Logo" />
         </div>
 
-        {/* Mobile Menu */}
         <ul className={`navbar-links ${isMenuOpen ? 'active' : ''}`}>
-          {/* Close Button for Mobile Menu */}
           {isMenuOpen && (
             <li className="close-btn">
               <button onClick={closeMenu}>✖</button>
@@ -104,7 +101,7 @@ const Navbar = () => {
 
           {isProfileMenuOpen && (
             <div className="profile-dropdown">
-              <button onClick={handleDashboard}>Dashboard</button> {/* Add Dashboard option */}
+              <button onClick={handleDashboard}>Dashboard</button>
               <button onClick={handleLogout}>Logout</button>
             </div>
           )}
