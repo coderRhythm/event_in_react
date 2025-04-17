@@ -23,7 +23,6 @@
   padding: 15px 0;
   border-image: linear-gradient(to right, #ff7f50, #ff1493, #1e90ff, #32cd32);
   border-image-slice: 1;
-  /* border-image: none; Remove gradient border */
 }
 
 
@@ -121,7 +120,6 @@
   background-color: rgba(255, 255, 255, 0.1);
   transform: translateY(-2px);
 }
-/* Profile Icon and Dropdown Menu */
 .profile-container {
   position: relative;
   cursor: pointer;
@@ -155,7 +153,6 @@
 .profile-dropdown button:hover {
   background-color: #444;
 }
-/* Navbar.css */
 .profile-container {
   position: relative;
   cursor: pointer;
@@ -220,7 +217,6 @@
   }
   
 }
-/* Responsive Styles */
 @media (max-width: 1024px) {
   .navbar-toggle {
     display: block;
