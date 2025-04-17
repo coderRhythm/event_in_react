@@ -3,7 +3,6 @@ import { useParams } from 'react-router-dom';
 
 const RegisterEvent = () => {
     const { eventId } = useParams(); 
-//    useParams
    
     
   return (
