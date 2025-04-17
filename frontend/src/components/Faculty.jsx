@@ -19,7 +19,6 @@ import { useNavigate } from "react-router-dom";
 import avatar2 from '../assets/avatar2.avif';
 import avatar3 from '../assets/avatar3.avif';
 import Loader from "./Loader"; 
-// import { Navigate, useNavigate } from "react-router-dom";
 import axios from "axios";
 import Chatbot from "./Chatbot";
 const Faculty = () => {
@@ -42,9 +41,8 @@ const fetchData = async () => {
   setError(null);
 
   try {
-    // Fetch events
     const eventsResponse = await axios.get("http://localhost:5000/getEvents", {
-      withCredentials: true, // Equivalent to credentials: "include"
+      withCredentials: true, 
     });
 
     const eventsData = eventsResponse.data;
@@ -53,7 +51,6 @@ const fetchData = async () => {
     setEvents(eventsData);
     setFilteredEvents(filterEventsByAudience(eventsData));
 
-    // Fetch student details
     const studentResponse = await axios.get("http://localhost:5000/student/studentDetails", {
       withCredentials: true,
     });
@@ -68,7 +65,6 @@ const fetchData = async () => {
 
   useEffect(() => {
     socket.on("new_event", (eventData) => {
-      // Check if the event is already in the notifications list
       const isDuplicate = notifications.some((event) => event.id === eventData.id);
       if (!isDuplicate) {
         setNotifications((prev) => [...prev, eventData]);
@@ -76,10 +72,8 @@ const fetchData = async () => {
       }
     });
 
-    // Fetch data on component mount
     fetchData();
 
-    // Clean up the WebSocket listener
     return () => {
       socket.off("new_event");
     };
@@ -94,7 +88,6 @@ const fetchData = async () => {
     return events.filter((event) => event.target_audience === 'faculty' || event.target_audience === 'both');
   };
 
-  // Scrollable Animations
   const [homeRef, homeInView] = useInView({ triggerOnce: true });
   const homeAnimation = useSpring({
     opacity: homeInView ? 1 : 0,
@@ -137,7 +130,6 @@ const fetchData = async () => {
     config: config.default,
   });
 
-  // Carousel Settings
   const carouselSettings = {
     dots: true,
     infinite: true,
@@ -169,7 +161,6 @@ const fetchData = async () => {
           )}
         </div>
 
-        {/* Notification Dropdown */}
         {showNotifications && (
           <div className="notification-dropdown">
             <h3>Notifications</h3>
@@ -193,7 +184,6 @@ const fetchData = async () => {
         </video>
       </section>
 
-      {/* About Us Section */}
       <section id="about" className="section about" ref={aboutRef}>
   <animated.div style={aboutAnimation}>
     <h2>About Event Hub</h2>
@@ -215,7 +205,6 @@ const fetchData = async () => {
         </div>
       </div>
 
-      {/* Right Side - Event Categories */}
       <div className="about-right">
   <div className="category-card">
     <h3>🔬 Academic Seminars</h3>
@@ -237,7 +226,6 @@ const fetchData = async () => {
 
 
 
-      {/* Events Section */}
       <section id="events" className="section events">
       <h2 className="events-title">Upcoming Events</h2>
       <p className="section-description">
@@ -254,7 +242,6 @@ const fetchData = async () => {
         <div className="event-grid">
           {filteredEvents.slice(0, showAll ? filteredEvents.length : 3).map((event) => (
             <div key={event.id} className="event-card">
-              {/* Event Image */}
               {event.event_image && (
                 <img
                   src={`http://localhost:5000${event.event_image}`}
@@ -263,10 +250,8 @@ const fetchData = async () => {
                 />
               )}
               
-              {/* Event Title */}
               <h3 className="event-name">{event.event_title}</h3>
 
-              {/* Show More Button */}
               <button className = "showMoreBtns" onClick={() => navigate(`/event/faculty/${event.id}`)}>
                 Show More <FaArrowRight />
               </button>
@@ -275,7 +260,7 @@ const fetchData = async () => {
           <div className="showmoreSection">
             {!showAll && filteredEvents.length > 3 && (
               <button className="show-more-btn" onClick={()=>navigate('/faculty/events')}>
-                <FaArrowRight /> {/* Arrow icon */}
+                <FaArrowRight /> 
               </button>
             )}
           </div>
