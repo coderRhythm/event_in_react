@@ -1,4 +1,4 @@
-/* General Styles */
+
 .login-container {
   display: flex;
   justify-content: center;
@@ -15,15 +15,14 @@
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   padding: 40px;
   width: 100%;
-  max-width: 400px; /* Default width for smaller screens */
+  max-width: 400px; 
   text-align: center;
   animation: fadeIn 0.5s ease-in-out;
 }
 
-/* Responsive Width Adjustments */
 @media (min-width: 768px) {
   .login-card {
-    max-width: 500px; /* Wider for tablets and larger screens */
+    max-width: 500px; 
   }
 }
 
