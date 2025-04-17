@@ -10,14 +10,14 @@
 h2 {
   text-align: center;
   font-size: 28px;
-  margin-bottom: 10px; /* Reduced margin-bottom */
+  margin-bottom: 10px; 
   color: #000000;
   font-weight: 600;
 }
 
 h3 {
   font-size: 22px;
-  margin-bottom: 15px; /* Adjusted margin-bottom */
+  margin-bottom: 15px; 
   color: #000000;
   font-weight: 500;
 }
@@ -73,7 +73,7 @@ button:hover {
 
 .dashboard-button {
   text-align: right;
-  margin-bottom: 10px; /* Reduced margin-bottom */
+  margin-bottom: 10px; 
 }
 
 .dashboard-button button {
@@ -97,7 +97,7 @@ button:hover {
 .step3,
 .step4,
 .step5 {
-  margin-bottom: 20px; /* Adjusted margin-bottom */
+  margin-bottom: 20px; 
 }
 
 .step5 {
@@ -107,13 +107,13 @@ button:hover {
 .step5 h3 {
   color: #000000;
   font-size: 24px;
-  margin-bottom: 15px; /* Adjusted margin-bottom */
+  margin-bottom: 15px; 
 }
 
 .step5 p {
   font-size: 16px;
   color: #000000;
-  margin-bottom: 15px; /* Adjusted margin-bottom */
+  margin-bottom: 15px; 
 }
 
 .step5 button {
@@ -124,7 +124,7 @@ button:hover {
 
 .target-audience,
 .event-type {
-  margin-bottom: 15px; /* Adjusted margin-bottom */
+  margin-bottom: 15px;
 }
 
 .target-audience h4,
@@ -132,7 +132,6 @@ button:hover {
   margin-bottom: 10px;
 }
 
-/* Placeholder text color */
 input::placeholder,
 textarea::placeholder {
   color: #999999;
