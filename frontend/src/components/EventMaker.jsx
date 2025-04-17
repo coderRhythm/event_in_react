@@ -19,17 +19,16 @@ const EventMaker = () => {
     additional_notes: "",
     organization_name: "",
     target_audience: "",
-    event_type: "free", // New field for event type (free or paid)
+    event_type: "free",
   });
 
   const [imageFile, setImageFile] = useState(null);
   const [events, setEvents] = useState([]);
-  const [step, setStep] = useState(1); // Track current step
+  const [step, setStep] = useState(1);
 
   const navigate = useNavigate(); 
 
   useEffect(() => {
-    // Fetch event manager ID and experience from cookies
     const cookies = document.cookie.split("; ").reduce((acc, cookie) => {
       const [name, value] = cookie.split("=");
       acc[name] = value;
@@ -70,10 +69,9 @@ const EventMaker = () => {
         formDataToSend.append("event_image", imageFile);
       }
   
-      // Send POST request
       const response = await fetch("http://localhost:5000/createEvent", {
         method: "POST",
-        credentials: "include", // Ensures cookies are sent
+        credentials: "include", 
         body: formDataToSend,
       });
   
@@ -106,7 +104,7 @@ const EventMaker = () => {
         additional_notes: "",
         organization_name: "",
         target_audience: "",
-        event_type: "", // Reset event type as well
+        event_type: "",
       });
   
       setImageFile(null); 
@@ -168,7 +166,6 @@ const EventMaker = () => {
               </select>
             </div>
             
-            {/* Event Type Field */}
             <div className="event-type">
               <h4>Event Type:</h4>
               <select 
@@ -285,8 +282,6 @@ const EventMaker = () => {
               onChange={handleChange}
               required
             />
-
-            {/* Image Upload */}
             <label>Upload Event Image:</label>
             <input
               type="file"
@@ -317,7 +312,6 @@ const EventMaker = () => {
               <p>{formData.target_audience}</p>
               <h4>Event Type:</h4>
               <p>{formData.event_type}</p>
-              {/* Additional fields can be reviewed here if needed */}
             </div>
             <button type="submit">Create Event</button>
             <button type="button" onClick={() => setStep(3)}>
