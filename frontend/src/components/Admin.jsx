@@ -15,7 +15,6 @@ const Admin = () => {
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
     const [faculty, setFaculty] = useState([]);
     const [isModalOpen, setIsModalOpen] = useState(false);
-    // const [selectedEventId, setSelectedEventId] = useState(null);
   const [PendingEvents, setPendingEvents] = useState([]);
   const [ApprovedEvents, setApprovedEvents] = useState([]);
 
@@ -29,8 +28,8 @@ const Admin = () => {
     const [totalEvents, setTotalEvents] = useState(0);
     const [isLoading, setIsLoading] = useState(false);
     const [errorMessage, setErrorMessage] = useState("");
-    const paginationRange = 5; // Number of page links to display
-    const [selectedFacultyId, setSelectedFacultyId] = useState(null); // Track selected faculty
+    const paginationRange = 5;
+    const [selectedFacultyId, setSelectedFacultyId] = useState(null); 
   const [totalPendingPages, setTotalPendingPages] = useState(1);
   const [totalApprovedPages, setTotalApprovedPages] = useState(1);
     useEffect(() => {
@@ -100,7 +99,7 @@ const Admin = () => {
       setSelectedFilter(status);
         
       handlePageChange(1);
-        // fetchEvents(1);
+   
         
     };
     const handleApprove = async () => {
@@ -118,7 +117,7 @@ const Admin = () => {
             progress: undefined,
         });
           closeModal();
-          // refreshEvents();  // Refresh event list after approval
+          
       } catch (error) {
           console.error("Error approving event:", error);
       }
@@ -170,7 +169,7 @@ const Admin = () => {
             setFaculty(response.data.faculties);
             setSelectedEventId(eventId);
             setAssignModalOpen(true);
-            setSelectedFacultyId(null); // Reset selection
+            setSelectedFacultyId(null); 
         } catch (error) {
             console.error("Error fetching faculties:", error);
             setErrorMessage("Failed to load faculties. Please try again.");
@@ -249,9 +248,7 @@ const Admin = () => {
                 </ul>
             </div>
 
-            {/* Main Content */}
             <div className="main-content">
-                {/* Hamburger Button */}
                 {!isSidebarOpen && (
                     <button className="hamburger-btn" onClick={toggleSidebar}>
                         ☰
@@ -262,7 +259,6 @@ const Admin = () => {
 
                 {errorMessage && <div className="error-message">{errorMessage}</div>}
 
-                {/* Filter Buttons */}
                 <div className="filter-buttons">
                     <button
                         className={`btn all ${selectedFilter === "all" ? "selected" : ""}`}
@@ -316,7 +312,6 @@ const Admin = () => {
                 </div>
             )}
 
-            {/* Modal for Approval Confirmation */}
                     </div>
 
                                     </td>
@@ -327,7 +322,6 @@ const Admin = () => {
                     </div>
                 )}
 
-                {/* Pagination */}
                 <div className="pagination">
     <div className="pagBtns">
         <button
@@ -346,7 +340,6 @@ const Admin = () => {
         </button>
     </div>
 
-    {/* Determine total pages dynamically based on selectedFilter */}
     <div className="pagNumberText">
         Page {currentPage} of{" "}
         {selectedFilter === "pending"
@@ -397,8 +390,6 @@ const Admin = () => {
 </div>
 
 
-
-                {/* Edit Modal */}
                 {editEvent && (
                     <>
                         <div className="modal-overlay" onClick={() => setEditEvent(null)}></div>
@@ -432,7 +423,6 @@ const Admin = () => {
                     </>
                 )}
 
-                {/* Assign Faculty Modal */}
                 {assignModalOpen && (
   <>
     <div
@@ -473,12 +463,12 @@ const Admin = () => {
 )}
 
 {isModalOpen && (
-  console.log("Modal is open"), // Debugging: Log when modal is rendered
+  console.log("Modal is open"), 
   <>
     <div
       className="modal-overlay"
       onClick={() => {
-        console.log("Modal overlay clicked"); // Debugging: Log overlay click
+        console.log("Modal overlay clicked"); 
         setIsModalOpen(false);
       }}
     ></div>
@@ -489,7 +479,7 @@ const Admin = () => {
         <button
           className="save-btn"
           onClick={() => {
-            console.log("Approve button clicked"); // Debugging: Log approve button click
+            console.log("Approve button clicked"); 
             handleApprove();
           }}
         >
@@ -498,7 +488,7 @@ const Admin = () => {
         <button
           className="cancel-btn"
           onClick={() => {
-            console.log("Cancel button clicked"); // Debugging: Log cancel button click
+            console.log("Cancel button clicked");
             closeModal();
           }}
         >
