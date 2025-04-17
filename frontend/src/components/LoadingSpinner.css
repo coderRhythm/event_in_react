@@ -1,6 +1,6 @@
-/* LoadingSpinner.css */
+
 .loader-container {
-    position: fixed;  /* Ensure the loader is fixed on the screen */
+    position: fixed; 
     top: 0;
     left: 0;
     display: flex;
