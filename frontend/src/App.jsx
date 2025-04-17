@@ -13,14 +13,11 @@ import EventInfo from "./components/EventInfo";
 import ViewFullEvents from "./components/ViewFullEvents";
 import Admin from "./components/Admin";
 import { io } from "socket.io-client";
-// Dashboard
 import "./App.css";
 import Dashboard from "./components/Dashboard";
 
-// Initialize WebSocket connection
 const socket = io("http://localhost:5000",{withCredentials: true,});
 
-// Create a context for the socket
 export const SocketContext = React.createContext();
 
 const App = () => {
@@ -28,13 +25,11 @@ const App = () => {
     <SocketContext.Provider value={socket}>
       <Router>
         <Routes>
-          {/* Public Routes */}
           <Route path="/" element={<Login />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/forgot-password" element={<ResetPassword />} />
 
-          {/* Private Routes */}
           {[
             { path: "/student", component: <Student />, role: "student" },
             { path: "/faculty", component: <Faculty />, role: "faculty" },
