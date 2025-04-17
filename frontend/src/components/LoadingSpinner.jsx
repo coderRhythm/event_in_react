@@ -1,5 +1,5 @@
 import React from "react";
-import { ClipLoader, FadeLoader, PulseLoader, RingLoader } from "react-spinners"; // You can use any other spinner too
+import { ClipLoader, FadeLoader, PulseLoader, RingLoader } from "react-spinners";
 import './LoadingSpinner.css'
 
 const LoadingSpinner = () => {
