@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import Cookies from "js-cookie"; 
-// import { MessageCircle } from "lucide-react";
 import { MessageCircle, User } from "lucide-react";
 const Chatbot = () => {
   const [messages, setMessages] = useState([]);
@@ -37,17 +36,17 @@ const [profilePhoto, setProfilePhoto] = useState("");
   }, [showModal]);
 
   const sendMessage = async (message) => {
-    if (!message.trim()) return; // Don't send empty messages
+    if (!message.trim()) return;
 
     const userMessage = { text: message, sender: "user" };
     setMessages((prev) => [...prev, userMessage]);
     setLoading(true);
-    setInput(""); // Clear input immediately after sending
+    setInput("");
 
     try {
       const response = await axios.post("http://localhost:5000/chatbot", {
         message: message,
-        event: selectedEvent, // Pass the selected event (or null if no event is selected)
+        event: selectedEvent, 
       });
 
       const botMessage = { text: response.data.response, sender: "bot" };
@@ -79,7 +78,7 @@ const [profilePhoto, setProfilePhoto] = useState("");
     try {
       const response = await axios.post("http://localhost:5000/chatbot", {
         message: question,
-        event: selectedEvent, // Pass the selected event (if any)
+        event: selectedEvent, 
       });
 
       const botMessage = { text: response.data.response, sender: "bot" };
@@ -121,7 +120,7 @@ const [profilePhoto, setProfilePhoto] = useState("");
   return (
     <>
       <button className="query-btn" onClick={() => setShowModal(true)}>
-  <MessageCircle size={20} /> {/* Chat icon */}
+  <MessageCircle size={20} />
   <span>Query</span>
 </button>
 
@@ -140,11 +139,11 @@ const [profilePhoto, setProfilePhoto] = useState("");
     <div key={index} className={`message ${msg.sender}`}>
       <div className="message-icon">
         {msg.sender === "bot" ? (
-          <MessageCircle size={20} /> // Chatbot icon
+          <MessageCircle size={20} /> 
         ) : profilePhoto ? (
           <img src={profilePhoto} alt="User" className="user-profile-pic" />
         ) : (
-          <User size={20} /> // Default user icon
+          <User size={20} /> 
         )}
       </div>
       <div className="message-text">
@@ -165,7 +164,6 @@ const [profilePhoto, setProfilePhoto] = useState("");
   <div ref={messagesEndRef}></div>
 </div>
 
-            {/* Exit Button (only shown when an event is selected) */}
             {selectedEvent && (
               <div className="exit-event-btn-container">
                 <button
@@ -177,7 +175,6 @@ const [profilePhoto, setProfilePhoto] = useState("");
               </div>
             )}
 
-            {/* Predefined Questions */}
             {!selectedEvent && (
               <div className="predefined-questions">
                 <button onClick={() => handlePredefinedQuestion("Most recent event?")}>
@@ -189,7 +186,6 @@ const [profilePhoto, setProfilePhoto] = useState("");
               </div>
             )}
 
-            {/* Event Buttons */}
             {events.length > 0 && !selectedEvent && messages[messages.length - 1]?.sender === "bot" && (
               <div className="event-buttons">
                 {events.map((event) => (
@@ -204,7 +200,6 @@ const [profilePhoto, setProfilePhoto] = useState("");
               </div>
             )}
 
-            {/* User Input */}
             <div className="chatbot-input">
               <input
                 type="text"
