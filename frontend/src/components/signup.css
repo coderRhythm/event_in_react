@@ -1,12 +1,11 @@
-/* General Styles */
 .signup-container {
   max-width: 500px;
   margin: 20vh auto;
   padding: 2rem;
-  border: 1px solid #e5e7eb; /* Match login form border color */
-  border-radius: 12px; /* Match login form border radius */
+  border: 1px solid #e5e7eb; 
+  border-radius: 12px; 
   background: #fff;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Match login form shadow */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   transform: translateY(0);
   animation: slideDown 0.5s ease-out;
 }
@@ -26,21 +25,20 @@
   text-align: center;
   margin-bottom: 1rem;
   font-size: 2rem;
-  color: black; /* Match login form title color */
+  color: black; 
 }
 
 .signup-container h3 {
   text-align: center;
   margin-bottom: 1rem;
   font-size: 1.5rem;
-  color: #6b7280; /* Match login form subtitle color */
+  color: #6b7280; 
 }
 
-/* Form Styles */
 .signup-form {
   display: flex;
   flex-direction: column;
-  gap: 16px; /* Match login form gap */
+  gap: 16px; 
 }
 
 .form-group {
@@ -52,19 +50,19 @@ input,
 select {
   width: 100%;
   padding: 12px;
-  border: 1px solid #e5e7eb; /* Match login form input border */
-  border-radius: 8px; /* Match login form input border radius */
+  border: 1px solid #e5e7eb; 
+  border-radius: 8px;
   font-size: 1rem;
   transition: border-color 0.3s ease, box-shadow 0.3s ease;
-  color: black; /* Match login form input text color */
-  background-color: white; /* Match login form input background */
+  color: black; 
+  background-color: white;
 }
 
 input:focus,
 select:focus {
   outline: none;
-  border-color: black; /* Match login form input focus border color */
-  box-shadow: 0 0 8px rgba(0, 0, 0, 0.1); /* Match login form input focus shadow */
+  border-color: black; 
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
 }
 
 button {
@@ -73,31 +71,31 @@ button {
   margin-top: 10px;
   font-size: 1rem;
   border: none;
-  border-radius: 8px; /* Match login form button border radius */
+  border-radius: 8px; 
   cursor: pointer;
   transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
 button:hover {
-  transform: translateY(-2px); /* Match login form button hover effect */
+  transform: translateY(-2px); 
 }
 
 .btn-primary {
-  background-color: black; /* Match login form button background */
-  color: white; /* Match login form button text color */
+  background-color: black; 
+  color: white; 
 }
 
 .btn-primary:hover {
-  background-color: #333; /* Match login form button hover background */
+  background-color: #333;
 }
 
 .btn-secondary {
-  background-color: #6c757d; /* Match login form secondary button background */
-  color: white; /* Match login form secondary button text color */
+  background-color: #6c757d; 
+  color: white; 
 }
 
 .btn-secondary:hover {
-  background-color: #565e64; /* Match login form secondary button hover background */
+  background-color: #565e64; 
 }
 
 .form-buttons {
@@ -106,31 +104,30 @@ button:hover {
   gap: 10px;
 }
 
-/* Responsive Adjustments */
 @media (max-width: 768px) {
   .signup-container {
-    max-width: 90%; /* Adjust width for smaller screens */
+    max-width: 90%; 
     padding: 1.5rem;
     box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
   }
 
   .signup-container h2 {
-    font-size: 1.8rem; /* Adjust font size for smaller screens */
+    font-size: 1.8rem; 
   }
 
   .signup-container h3 {
-    font-size: 1.3rem; /* Adjust font size for smaller screens */
+    font-size: 1.3rem; 
   }
 
   button {
-    font-size: 0.9rem; /* Adjust font size for smaller screens */
-    padding: 10px; /* Adjust padding for smaller screens */
+    font-size: 0.9rem; 
+    padding: 10px; 
   }
 
   input,
   select {
-    font-size: 0.9rem; /* Adjust font size for smaller screens */
-    padding: 10px; /* Adjust padding for smaller screens */
+    font-size: 0.9rem;
+    padding: 10px;
   }
 }
 
@@ -141,16 +138,16 @@ button:hover {
   }
 
   .signup-container h2 {
-    font-size: 1.5rem; /* Adjust font size for very small screens */
+    font-size: 1.5rem; 
   }
 
   .signup-container h3 {
-    font-size: 1.2rem; /* Adjust font size for very small screens */
+    font-size: 1.2rem;
   }
 
   input,
   select {
-    font-size: 0.85rem; /* Adjust font size for very small screens */
-    padding: 8px; /* Adjust padding for very small screens */
+    font-size: 0.85rem; 
+    padding: 8px;
   }
 }
