@@ -28,7 +28,7 @@
 
 @media (min-width: 1024px) {
   .login-card {
-    max-width: 600px; /* Even wider for desktops */
+    max-width: 600px; 
   }
 }
 
@@ -71,7 +71,6 @@
   margin-bottom: 24px;
 }
 
-/* Form Styles */
 .login-form {
   display: flex;
   flex-direction: column;
@@ -137,7 +136,6 @@
   transform: translateY(-2px);
 }
 
-/* Divider */
 .divider {
   display: flex;
   align-items: center;
@@ -157,7 +155,6 @@
   border-bottom: 1px solid #e5e7eb;
 }
 
-/* Google Login Button */
 .google-login-btn {
   width: 100%;
   padding: 12px;
@@ -185,7 +182,6 @@
   font-size: 16px;
 }
 
-/* Links */
 .forgot-password-link,
 .signup-link {
   font-size: 14px;
@@ -205,7 +201,6 @@
   text-decoration: underline;
 }
 
-/* Error Text */
 .error-text {
   color: #ef4444;
   font-size: 14px;
