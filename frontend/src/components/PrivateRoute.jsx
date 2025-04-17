@@ -1,7 +1,6 @@
 import React from 'react';
 import { Navigate } from 'react-router-dom';
 
-// Function to retrieve a specific cookie
 const getCookie = (name) => {
   const cookies = document.cookie.split('; ');
   for (let cookie of cookies) {
