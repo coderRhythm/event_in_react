@@ -7,7 +7,6 @@
   display: flex !important;
   flex-direction: column !important;
   align-items: center !important;
-  /* text-align: center !important; */
   justify-content: center !important;
   border-bottom: 1px solid #ddd !important; 
 }
@@ -83,7 +82,6 @@
   min-width: 320px !important;
 }
 
-/* Card styles */
 .about-card, .category-card {
   background: #ffffff !important;
   padding: 25px !important;
@@ -159,7 +157,6 @@ p {
   margin-bottom: 30px !important;
 }
 
-/* EVENT GRID */
 .event-grid {
   display: flex;
   flex-wrap: wrap;
@@ -187,7 +184,7 @@ p {
 
 .showMoreBtns {
   display: block;
-  background-color: #007bff; /* Blue color */
+  background-color: #007bff; 
   color: white;
   border: none;
   border-radius: 8px;
@@ -196,9 +193,9 @@ p {
   padding: 8px 12px;
   cursor: pointer;
   transition: all 0.3s ease-in-out;
-  width: 100%; /* Full width inside card */
-  max-width: 120px; /* Restrict max width */
-  margin: 10px auto 0; /* Center button */
+  width: 100%; 
+  max-width: 120px; 
+  margin: 10px auto 0; 
   text-align: center;
 }
 
@@ -280,12 +277,10 @@ p {
 }
 
 .showmoreSection {
-  /* Center the section */
   display: flex !important;
   justify-content: center !important;
   align-items: center !important;
   text-align: center !important;
-  /* background-color: red !important; */
   width: 100% !important; 
   position: relative !important;
 }
@@ -415,7 +410,6 @@ p {
 }
 
 
-/* Contact Section */
 .contact-details {
   margin-bottom: 30px !important;
 }
@@ -423,7 +417,7 @@ p {
 .contact-details p {
   font-size: 1.2rem !important;
   margin: 15px 0 !important;
-  color: #333 !important; /* Dark gray text */
+  color: #333 !important; 
 }
 
 .social-links {
@@ -433,17 +427,16 @@ p {
 }
 
 .social-links a {
-  color: #000 !important; /* Black text */
+  color: #000 !important; 
   text-decoration: none !important;
   font-weight: bold !important;
   transition: color 0.3s ease !important;
 }
 
 .social-links a:hover {
-  color: #555 !important; /* Dark gray text */
+  color: #555 !important; 
 }
 
-/* Responsive Design */
 @media (max-width: 1024px) {
   .section {
     padding: 80px 25px !important;
@@ -528,7 +521,6 @@ p {
   display: grid !important;
   grid-template-columns: repeat(3,1fr) !important;
   gap: 2rem !important;
-  /* justify-items: center !important; */
 }
 
 .speaker-card {
@@ -538,9 +530,7 @@ p {
   border-radius: 12px !important;
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1) !important;
   transition: transform 0.3s ease, box-shadow 0.3s ease !important;
-  /* text-align: center !important; */
   max-width: 350px !important;
-  /* position: relative !important; */
 }
 
 .speaker-card:hover {
@@ -552,7 +542,6 @@ p {
   width: 100% !important;
   height: 200px !important;
   border-radius: 50% !important;
-  /* border: 4px solid #003366 !important; */
   margin-bottom: 1rem !important;
   transition: transform 0.3s ease !important;
 }
@@ -581,7 +570,6 @@ p {
   }
   .speaker-grid {
     grid-template-columns:1fr  !important;
-    /* gap: 1.5rem !important; */
   }
   
 .speaker-image {
@@ -654,7 +642,6 @@ p {
   color: #666 !important;
 }
 
-/* Notification Icon Container */
 .notification-icon-container {
   position: fixed;
   bottom: 20px;
@@ -662,7 +649,6 @@ p {
   z-index: 1000;
 }
 
-/* Notification Icon */
 .notification-icon {
   position: relative;
   background-color: #000000;
@@ -678,7 +664,6 @@ p {
   background-color: #333333;
 }
 
-/* Notification Badge */
 .notification-badge {
   position: absolute;
   top: -5px;
@@ -690,7 +675,6 @@ p {
   font-size: 12px;
 }
 
-/* Notification Dropdown */
 .notification-dropdown {
   position: absolute;
   bottom: 50px;
@@ -726,15 +710,14 @@ p {
   color: #333333;
 }
 
-/* Query Button */
 .query-btn {
   position: fixed;
   bottom: 20px;
   left: 20px;
-  width: auto; /* Adjust width dynamically */
+  width: auto;
   display: flex;
   align-items: center;
-  gap: 8px; /* Space between icon and text */
+  gap: 8px;
   padding: 10px 16px;
   background: #3498db;
   color: #fff;
@@ -752,7 +735,6 @@ p {
   transform: scale(1.05);
 }
 
-/* Chatbot Modal Overlay */
 .chatbot-modal-overlay {
   position: fixed;
   top: 0;
@@ -774,7 +756,6 @@ p {
   }
 }
 
-/* Chatbot Modal */
 .chatbot-modal {
   position: fixed;
   bottom: 90px;
@@ -801,12 +782,11 @@ p {
   }
 }
 
-/* Chatbot Header */
 .chatbot-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 8px; /* Reduced padding */
+  padding: 8px;
   background: #faf7f7;
   color: #201f1f;
   border-top-left-radius: 10px;
@@ -815,7 +795,7 @@ p {
 
 .chatbot-header h3 {
   margin: 0;
-  font-size: 16px; /* Adjusted font size */
+  font-size: 16px;
 }
 
 .close-btn {
@@ -824,17 +804,16 @@ p {
   width: 20px;
   text-align: center;
   color: #010101;
-  font-size: 18px; /* Adjusted font size */
+  font-size: 18px; 
   cursor: pointer;
 }
 
-/* Chatbot Messages */
 .chatbot-messages {
   flex: 1;
-  padding: 8px; /* Reduced padding */
+  padding: 8px; 
   background: #fff;
   overflow-y: auto;
-  max-height: 250px; /* Reduced height */
+  max-height: 250px; 
 }
 
 .message {
@@ -842,7 +821,7 @@ p {
   padding: 6px;
   border-radius: 5px;
   color: #000;
-  font-size: 14px; /* Adjusted font size */
+  font-size: 14px; 
   opacity: 0;
   animation: fadeInMessage 0.3s ease forwards;
 }
@@ -858,7 +837,6 @@ p {
   }
 }
 
-/* Chatbot Input */
 .chatbot-input {
   padding: 8px;
   background: #fff;
@@ -873,7 +851,7 @@ p {
   border-radius: 20px;
   color: #000000;
   background: #fff;
-  font-size: 14px; /* Adjusted font size */
+  font-size: 14px;
   margin-bottom: 8px;
 }
 
@@ -887,20 +865,19 @@ p {
   border-radius: 20px;
   cursor: pointer;
   transition: background 0.3s;
-  font-size: 14px; /* Adjusted font size */
+  font-size: 14px;
 }
 
 .chatbot-input button:hover {
   background: #000000;
 }
 
-/* Event Buttons */
 .event-buttons {
   display: flex;
-  flex-wrap: nowrap; /* Keep buttons in a single row */
+  flex-wrap: nowrap;
   gap: 8px;
   padding: 8px;
-  overflow-x: auto; /* Allow horizontal scrolling if needed */
+  overflow-x: auto; 
   max-height: 250px;
   margin-bottom: 8px;
 }
@@ -916,8 +893,8 @@ p {
   border: none;
   border-radius: 20px;
   cursor: pointer;
-  white-space: nowrap; /* Prevent text wrapping */
-  font-size: 14px; /* Adjusted font size */
+  white-space: nowrap; 
+  font-size: 14px; 
   transition: background 0.3s, transform 0.3s;
   opacity: 0;
   animation: fadeInButton 0.4s ease forwards;
@@ -934,13 +911,12 @@ p {
   }
 }
 
-/* Predefined Questions */
 .predefined-questions {
   display: flex;
-  flex-wrap: nowrap; /* Keep buttons in a single row */
+  flex-wrap: nowrap; 
   gap: 8px;
   padding: 8px;
-  overflow-x: auto; /* Allow horizontal scrolling if needed */
+  overflow-x: auto; 
 }
 
 .predefined-questions button {
@@ -950,8 +926,8 @@ p {
   border: none;
   border-radius: 20px;
   cursor: pointer;
-  white-space: nowrap; /* Prevent text wrapping */
-  font-size: 14px; /* Adjusted font size */
+  white-space: nowrap; 
+  font-size: 14px; 
   transition: background 0.3s, transform 0.3s;
 }
 
@@ -960,116 +936,100 @@ p {
   transform: scale(1.05);
 }
 
-/* Exit Event Button */
 .exit-event-btn-container {
   display: flex;
-  justify-content: flex-end; /* Align button to the right */
-  width: 100%; /* Take full width of the modal */
-  margin-bottom: 10px; /* Space between exit button and input box */
+  justify-content: flex-end;
+  width: 100%; 
+  margin-bottom: 10px;
 }
 
 .exit-event-btn {
-  width: 100px; /* Set fixed width */
-  background-color: #000000a5; /* Green color for exit button */
+  width: 100px; 
+  background-color: #000000a5;
   color: white;
   border: none;
   padding: 8px 16px;
-  border-radius: 40px; /* Rounded corners */
+  border-radius: 40px;
   cursor: pointer;
-  font-size: 14px; /* Adjusted font size */
-  transition: background-color 0.3s ease; /* Smooth hover transition */
-  margin-left: auto; /* Push button to the right */
+  font-size: 14px; 
+  transition: background-color 0.3s ease; 
+  margin-left: auto;
 }
 
 .exit-event-btn:hover {
-  background-color: #080808; /* Darker green on hover */
+  background-color: #080808; 
 }
 
-/* Responsive Design */
 @media (max-width: 768px) {
-  /* Chatbot Modal */
   .chatbot-modal {
-    /* height: /; */
-    width: 90%; /* Take up 90% of the screen width */
-    left: 5%; /* Center the modal */
-    bottom: 20px; /* Move closer to the bottom */
+    width: 90%; 
+    left: 5%; 
+    bottom: 20px; 
   }
 
-  /* Chatbot Messages */
   .chatbot-messages {
-    max-height: 200px; /* Reduce height for smaller screens */
+    max-height: 200px;
   }
 
-  /* Chatbot Input */
   .chatbot-input input,
   .chatbot-input button {
-    font-size: 13px; /* Smaller font size for mobile */
+    font-size: 13px;
   }
 
-  /* Event Buttons */
   .event-btn {
-    font-size: 13px; /* Smaller font size for mobile */
+    font-size: 13px; 
     padding: 6px 12px;
   }
 
-  /* Predefined Questions */
   .predefined-questions button {
-    font-size: 13px; /* Smaller font size for mobile */
+    font-size: 13px; 
     padding: 6px 12px;
   }
 
-  /* Exit Event Button */
   .exit-event-btn {
-    width: 80px; /* Smaller width for mobile */
-    font-size: 13px; /* Smaller font size for mobile */
+    width: 80px; 
+    font-size: 13px; 
     padding: 6px 12px;
   }
 }
 
 @media (max-width: 480px) {
-  /* Chatbot Modal */
   .chatbot-modal {
-    width: 95%; /* Take up 95% of the screen width */
-    left: 2.5%; /* Center the modal */
-    bottom: 10px; /* Move closer to the bottom */
+    width: 95%;
+    left: 2.5%; 
+    bottom: 10px; 
   }
 
-  /* Chatbot Messages */
   .chatbot-messages {
-    max-height: 150px; /* Further reduce height for very small screens */
+    max-height: 150px; 
   }
 
-  /* Chatbot Input */
   .chatbot-input input,
   .chatbot-input button {
-    font-size: 12px; /* Even smaller font size for very small screens */
+    font-size: 12px;
   }
 
-  /* Event Buttons */
   .event-btn {
-    font-size: 12px; /* Even smaller font size for very small screens */
+    font-size: 12px; 
     padding: 4px 8px;
   }
 
-  /* Predefined Questions */
   .predefined-questions button {
-    font-size: 12px; /* Even smaller font size for very small screens */
+    font-size: 12px;
     padding: 4px 8px;
   }
 
-  /* Exit Event Button */
   .exit-event-btn {
-    width: 70px; /* Even smaller width for very small screens */
-    font-size: 12px; /* Even smaller font size for very small screens */
+    width: 70px; 
+    font-size: 12px; 
     padding: 4px 8px;
   }
 }
 
-/* Message Container */
 .message {
   display: flex;
-  align-items: flex-start; /* Align icon and text at the top */
-  gap: 10px; /* Gap between icon and text */
+  align-items: flex-start; 
+  gap: 10px;
   margin-bottom: 8px;
   padding: 6px;
   border-radius: 5px;
@@ -1079,37 +1039,30 @@ p {
   animation: fadeInMessage 0.3s ease forwards;
 }
 
-/* Message Icon */
 .message-icon {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 24px; /* Fixed width for icons */
-  height: 24px; /* Fixed height for icons */
-  flex-shrink: 0; /* Prevent icon from shrinking */
+  width: 24px; 
+  height: 24px; 
+  flex-shrink: 0; 
 }
 
-/* Message Text */
 .message-text {
-  flex: 1; /* Take remaining space */
+  flex: 1;
 }
 
-/* Bot Message Styling */
 .message.bot {
-  background: #f1f1f1; /* Light gray background for bot messages */
+  background: #f1f1f1; 
 }
 
-/* User Message Styling */
 .message.user {
-  /* background: #3498db; Blue background for user messages */
-  /* color: #fff; White text for user messages */
-  margin-left: auto; /* Align user messages to the right */
-  max-width: 100%; /* Limit width of user messages */
+  margin-left: auto; 
+  max-width: 100%; 
 }
 
-/* Typing Indicator */
 .message.bot .message-text {
-  font-style: italic; /* Italicize typing text */
+  font-style: italic; 
 }
 
 .user-profile-pic {
