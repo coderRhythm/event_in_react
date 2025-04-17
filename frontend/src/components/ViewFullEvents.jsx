@@ -2,14 +2,10 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import "./ViewFullEvents.css"; // Import the CSS file
-// import Loader from "./Loader";
 import LoadingSpinner from "./LoadingSpinner";
-// LoadingSpinner
 
 const API_BASE_URL = "http://localhost:5000";
-// Loader
 const ViewFullEvents = () => {
-  //  const [isLoading,setIsLoading] = useState(false);
   const [events, setEvents] = useState([]);
   const [filteredEvents, setFilteredEvents] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -33,7 +29,7 @@ const ViewFullEvents = () => {
       const response = await axios.get(`${API_BASE_URL}/getEvents`);
       if (response.status === 200) {
         setEvents(response.data);
-        setFilteredEvents(response.data); // Default to all events
+        setFilteredEvents(response.data); 
       } else {
         throw new Error("Failed to fetch events");
       }
