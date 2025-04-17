@@ -112,18 +112,12 @@ Realtime EventHub revolutionizes how colleges manage events by providing a compr
   <img src="https://github.com/user-attachments/assets/f8cd5365-9f21-4f5d-83c4-a4545df39b44" alt="Admin Dashboard" width="400"/>
 </div>
 
-## 🔗 Connect With Us
 
-- [Project Repository](#)
-- [Documentation](#)
-- [Issue Tracker](#)
-- [Contact Us](#)
 
 ## 🏆 Contributors
 
-- [Your Name](https://github.com/yourusername)
-- [Contributor 1](https://github.com/contributor1)
-- [Contributor 2](https://github.com/contributor2)
+- [Rhythm sethiya](https://github.com/coderRhythm)
+
 
 
 ---
