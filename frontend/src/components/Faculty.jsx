@@ -1,9 +1,6 @@
 import React, { useState, useEffect ,useContext} from "react";
-// import "./Student.css";
 import Navbar from "./Navbar";
-// navigate
-// Navigate
-// axios
+
 
 import { useSpring, animated, config } from "@react-spring/web";
 import { useInView } from "react-intersection-observer";
