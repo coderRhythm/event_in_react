@@ -10,14 +10,12 @@ import { FaArrowRight, FaCalendar, FaUsers, FaSmile, FaFacebook, FaTwitter, FaIn
 import avatar1 from '../assets/avatar1.avif';
 import avatar2 from '../assets/avatar2.avif';
 import avatar3 from '../assets/avatar3.avif';
-import Loader from "./Loader"; // Import the Loader component
+import Loader from "./Loader"; 
 import registerEvent from "./registerEvent";
-// useContext
 import { SocketContext } from "../App";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import Chatbot from "./Chatbot";
-// Chatbot
 
 const Student = () => {
   const socket = useContext(SocketContext);
@@ -38,7 +36,6 @@ const Student = () => {
     setError(null);
   
     try {
-      // Fetch events
       const eventsResponse = await axios.get(`${api_url}/getEvents`, {
         withCredentials: true, 
       });
@@ -49,7 +46,6 @@ const Student = () => {
       setEvents(eventsData);
       setFilteredEvents(filterEventsByAudience(eventsData));
   
-      // Fetch student details
       const studentResponse = await axios.get(`${api_url}/student/studentDetails`, {
         withCredentials: true,
       });
@@ -64,7 +60,6 @@ const Student = () => {
 
   useEffect(() => {
     socket.on("new_event", (eventData) => {
-      // Check if the event is already in the notifications list
       const isDuplicate = notifications.some((event) => event.id === eventData.id);
       if (!isDuplicate) {
         setNotifications((prev) => [...prev, eventData]);
@@ -72,10 +67,8 @@ const Student = () => {
       }
     });
 
-    // Fetch data on component mount
     fetchData();
 
-    // Clean up the WebSocket listener
     return () => {
       socket.off("new_event");
     };
@@ -116,7 +109,6 @@ function handleRegister(evenId)
           )}
         </div>
 
-        {/* Notification Dropdown */}
         {showNotifications && (
           <div className="notification-dropdown">
             <h3>Notifications</h3>
@@ -141,7 +133,6 @@ function handleRegister(evenId)
         </video>
       </section>
 
-      {/* About Us Section */}
       <section id="about" className="section about" ref={aboutRef}>
   <animated.div style={aboutAnimation}>
     <h2>About Event Hub</h2>
@@ -151,7 +142,6 @@ function handleRegister(evenId)
     </p>
 
     <div className="about-container">
-      {/* Left Side - About Info */}
       <div className="about-left">
         <div className="about-card">
           <h3>🎯 Our Mission</h3>
@@ -163,7 +153,6 @@ function handleRegister(evenId)
         </div>
       </div>
 
-      {/* Right Side - Event Categories */}
       <div className="about-right">
         <div className="category-card">
           <h3>💻 Tech & Innovation</h3>
@@ -184,7 +173,6 @@ function handleRegister(evenId)
 
 
 
-      {/* Events Section */}
      <section id="events" className="section events">
       <h2 className="events-title">Upcoming Events</h2>
       <p className="section-description">
@@ -201,7 +189,6 @@ function handleRegister(evenId)
         <div className="event-grid">
           {filteredEvents.slice(0, showAll ? filteredEvents.length : 3).map((event) => (
             <div key={event.id} className="event-card">
-              {/* Event Image */}
               {event.event_image && (
                 <img
                   src={`http://localhost:5000${event.event_image}`}
@@ -210,10 +197,8 @@ function handleRegister(evenId)
                 />
               )}
               
-              {/* Event Title */}
               <h3 className="event-name">{event.event_title}</h3>
 
-              {/* Show More Button */}
               <button onClick={() => navigate(`/event/student/${event.id}`)}>
                 Show More <FaArrowRight />
               </button>
@@ -222,7 +207,7 @@ function handleRegister(evenId)
           <div className="showmoreSection">
             {!showAll && filteredEvents.length > 3 && (
               <button className="show-more-btn" onClick={()=>navigate('/student/events')}>
-                <FaArrowRight /> {/* Arrow icon */}
+                <FaArrowRight /> 
               </button>
             )}
           </div>
