@@ -12,17 +12,14 @@ import RegisterEvent from "./components/RegisterEvent";
 import EventInfo from "./components/EventInfo";
 import ViewFullEvents from "./components/ViewFullEvents";
 import Admin from "./components/Admin";
-import { io } from "socket.io-client";
+
 import "./App.css";
 import Dashboard from "./components/Dashboard";
 
-const socket = io("http://localhost:5000",{withCredentials: true,});
-
-export const SocketContext = React.createContext();
 
 const App = () => {
   return (
-    <SocketContext.Provider value={socket}>
+
       <Router>
         <Routes>
           <Route path="/" element={<Login />} />
@@ -56,7 +53,7 @@ const App = () => {
           ))}
         </Routes>
       </Router>
-    </SocketContext.Provider>
+
   );
 };
 
