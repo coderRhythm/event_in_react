@@ -33,27 +33,7 @@ const io = new Server(server, {
         credentials: true,
     },
 });
-const events = [];
-io.on("connection", (socket) => {
-    console.log(`Client connected: ${socket.id}`);
 
-    socket.on("get_missed_events", (lastEventId) => {
-        const missedEvents = events.filter(event => event.id > lastEventId);
-        socket.emit("missed_events", missedEvents);
-    });
-
-    socket.on("error", (err) => {
-        console.error("Socket error:", err);
-    });
-
-    socket.on("disconnect", () => {
-        console.log("Client disconnected");
-    });
-});
-  const broadcastEventCreation = (eventData) => {
-    events.push(eventData);
-    io.emit("new_event", eventData); 
-  };
 if (!fs.existsSync(uploadDir)) {fs.mkdirSync(uploadDir);}
 
 
@@ -719,7 +699,7 @@ app.post("/createEvent", upload.single("event_image"), async (req, res) => {
             event_image: req.file ? `/uploads/${req.file.filename}` : null, 
             status: 'pending', event_type
         });
-        broadcastEventCreation(newEvent);
+     
         const mailOptions = {
             from: '"Event Manager Notification" ',
             to: "1032212447@mitwpu.edu.in",
